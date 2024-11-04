@@ -37,7 +37,8 @@
     color:black;
     border-radius: 0px;
     transition: 0.5s;
-    
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
 
 }
 .mid ul li a:hover{
