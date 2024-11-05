@@ -2,12 +2,12 @@
         <div class="logoN">
             {% load static %}
             <img src="{%  static 'image/icon/logoN.png' %}" height="60" width="100" alt="">
-            <span><span style="color: rgba(64, 155, 230, 0.863);">Ride</span> Schedule</span>
+            <span style="font-size:24px;"><span style="color: rgba(64, 155, 230, 0.863); font-size:24px;">Ride</span> Schedule</span>
         </div>
         <div class="mid">
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="#" class="service fix">Service <i class="fas fa-angle-down" style="font-size:18px;"></i> </a>
+                <li><a href="#" class="service fix">Service <i class="fas fa-angle-down" style="font-size:12px;"></i> </a>
                     <div class="dropdown" >
                         <ul >
                             
@@ -31,7 +31,7 @@
 
                 </li>
 
-                <li><a href="#" class="fix">Help <i class="fas fa-angle-down" style="font-size:18px;"></i> </a>
+                <li><a href="#" class="fix">Help <i class="fas fa-angle-down" style="font-size:12px;"></i> </a>
                     <div class="dropdown" >
                         <ul >
                             <li><a href="#">User help center</a></li>
@@ -42,7 +42,7 @@
 
                     </div>
                 </li>
-                <li><a href="#" class="fix">Contact <i class="fas fa-angle-down" style="font-size:18px;"></i> </a>
+                <li><a href="#" class="fix">Contact <i class="fas fa-angle-down" style="font-size:12px;"></i> </a>
                     <div class="dropdown" >
                         <ul >
                             <li><a href="#"><i class="fa fa-comment"></i> Send a message</a></li>
@@ -57,7 +57,7 @@
 
                     </div>
                 </li>
-                <li><a href="#" class="fix">More <i class="fas fa-angle-down" style="font-size:18px;"></i> </a>
+                <li><a href="#" class="fix">More <i class="fas fa-angle-down" style="font-size:12px;"></i> </a>
                     <div class="dropdown" >
                         <ul >
 
@@ -80,7 +80,7 @@
              
             <div><a href="{% url 'login' %}"><span>Login</span></a></div>
 
-            <div><img  src="{%  static 'image/icon/profile.png' %}" height="50" width="50" alt="logo"></div>
+            <div><a href="{% url 'userProfile' %}"><img  src="{%  static 'image/icon/profile.png' %}" height="50" width="50" alt="logo"></a></div>
         
         </div>
 

@@ -27,6 +27,7 @@ urlpatterns = [
     path('',b_view.home,name='home'),
     path('login',a_view.login,name='login'),
     path('weeklySchedule',s_view.weeklySchedule,name='weeklySchedule'),
+    path('userProfile',a_view.userProfile,name='userProfile'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

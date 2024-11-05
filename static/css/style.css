@@ -6,7 +6,7 @@
 }
 .imagediv {
    position: absolute;
-   height: 100vh;
+   height: 100%;
    width: 100%;
    z-index: -1;
    pointer-events: none;
@@ -32,13 +32,15 @@ body{
 }
 .button {
    position: absolute;
-  background-color: #0491aa;
+  background-color: #021116;
   border: none;
   color: white;
   padding: 15px 32px;
+  padding-left:10%;
+  padding-right:12%;
   text-align: center;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 16px;
   cursor: pointer;
   border-radius: 25px;
   left:20%;
