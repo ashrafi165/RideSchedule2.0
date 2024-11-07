@@ -2,9 +2,9 @@
 {% load static %}
 {% block content %}
 <div class="imagediv">
-    <img src="{%  static 'image/background/bg3.png' %}" height="100%"  alt="bg">
+    <img src="{%  static 'image/background/bg3.png' %}" height="100%" width="100%" alt="bg">
 </div>
-<div class="container">
+<div class="containerSchedule">
       <div class="scheduleContainer">
          <div class="form">
             <form action="{% url 'weeklySchedule' %}" method="POST">

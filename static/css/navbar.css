@@ -133,3 +133,20 @@
 
 
 }
+@media screen and (max-width: 700px){
+    
+    .mid{
+        display:none;
+    }
+    .navMenu{
+
+    }
+ }
+
+ @media screen and (max-width: 1000px){
+    
+    .mid{
+        display:none;
+    }
+    
+ }

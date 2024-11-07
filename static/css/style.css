@@ -8,7 +8,7 @@
    position: absolute;
    height: 100%;
    width: 100%;
-   z-index: -1;
+   z-index: -99;
    pointer-events: none;
    background-color: #fff;
    
@@ -28,11 +28,13 @@ body{
    height: 50%;
    
    left:8%;
-   top:30vh;
+   top:20vh;
+   z-index: -1;
 }
+
 .button {
    position: absolute;
-  background-color: #021116;
+  background-color: #10182F;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -51,32 +53,9 @@ body{
   background-color: #2fb2c9;
 }
 
-.footer-main{
-   display: block;
-   position:absolute;
-   top:100vh;
-   
-   width: 100%;
-   background-color: rgb(22, 136, 168);
-   color: white;
-   height: 350px;
-   border-width: 3px;
-   border-top-style: solid;
-   border-color: #195964;
-   
 
-}
-.footer-main .footer-top{
-   color: white;
-   width: 100%;
-   padding: 20px;
-   display:block;
-   margin:10px;
-}
-.footer-top a{
-   color:white;
-   margin-right: 20px;
-}
+
+
 .form-control-field{
    
    border-radius: 4px;
@@ -100,7 +79,7 @@ body{
    display:block;
    position: absolute;
    border-style: solid;
-   border-color:#00bcd4;
+   border-color:#00bdd6;
    border-radius: 20px;
    border-width: 3px;
    margin-left: 40%;
@@ -122,3 +101,40 @@ body{
    
    
 }
+@media screen and (max-width: 1280px){
+   
+   .home-main{
+      top:20vh;
+      width:40%;
+      left:10%;
+   }
+   .home-main .image-div img{
+      width: 70%;
+
+   }
+   .button{
+      left:10%;
+   }
+   
+   
+}
+@media screen and (max-width: 700px){
+   .imagediv{
+      display:none;
+      background-color: #00bdd6;
+   }
+   .home-main{
+      top:30vh;
+      width:70%;
+   }
+   .home-main .image-div img{
+      width: 100%;
+
+   }
+   .button{
+      left:11%;
+   }
+   
+   
+}
+
