@@ -77,8 +77,11 @@
         <div class="profile" >
                         
             <i class='fa fa-user'></i>
-             
-            <div><a href="{% url 'login' %}"><span>Login</span></a></div>
+             {% if user.is_authenticated %}
+                <div><span>{{request.user}}</span></div>
+             {% else %}
+                <div><a href="{% url 'loginUser' %}"><span>Login</span></a></div>
+             {% endif %}
 
             <div><a href="{% url 'userProfile' %}"><img  src="{%  static 'image/icon/profile.png' %}" height="50" width="50" alt="logo"></a></div>
         

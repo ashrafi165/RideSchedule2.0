@@ -15,7 +15,8 @@
       <div class="box">
         <div class="inner-box">
           <div class="forms-wrap">
-            <form action="index.html" autocomplete="off" class="sign-in-form">
+            <form  autocomplete="off" class="sign-in-form" action="{% url 'loginUser' %}" id="LogInForm" method="POST">
+            {% csrf_token %}
               <div class="logo">
                 <img  src="{%  static 'loginImg/logo.png' %}" alt="logo">
                 
@@ -35,6 +36,9 @@
                     minlength="4"
                     class="input-field"
                     autocomplete="off"
+                    id="username" 
+                    name="username" 
+                    
                     required
                   />
                   <label class="labelText">Name</label>
@@ -46,6 +50,9 @@
                     minlength="4"
                     class="input-field"
                     autocomplete="off"
+                    id="password" 
+                    name="password" 
+                    
                     required
                   />
                   <label class="labelText">Password</label>
@@ -60,7 +67,8 @@
               </div>
             </form>
 
-            <form action="index.html" autocomplete="off" class="sign-up-form">
+            <form autocomplete="off" class="sign-up-form" action="{% url 'createRider' %}" method="POST"  enctype="multipart/form-data">
+            {% csrf_token %}
               <div class="logo">
                 <img  src="{%  static 'loginImg/logo.png' %}" alt="logo">
                 <h4>Ride Schedule</h4>
@@ -79,6 +87,7 @@
                     minlength="4"
                     class="input-field"
                     autocomplete="off"
+                    id="username" name="username" 
                     required
                   />
                   <label class="labelText">Name</label>
@@ -89,6 +98,7 @@
                     type="email"
                     class="input-field"
                     autocomplete="off"
+                    id="username" name="email" 
                     required
                   />
                   <label class="labelText">Email</label>
@@ -100,9 +110,22 @@
                     minlength="4"
                     class="input-field"
                     autocomplete="off"
+                    id="password" name="password" 
                     required
                   />
                   <label class="labelText">Password</label>
+                </div>
+
+                <div class="input-wrap">
+                  <input
+                    type="password"
+                    minlength="4"
+                    class="input-field"
+                    autocomplete="off"
+                    id="password" name="cpassword" 
+                    required
+                  />
+                  <label class="labelText">Confirm Password</label>
                 </div>
 
                 <input type="submit" value="Sign Up" class="sign-btn" />
