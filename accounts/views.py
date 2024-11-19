@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import render ,redirect
-from .models import Profile, Schedule ,Notification
+from accounts.models import Profile, Schedule ,Notification
 
 from .forms import *
 from django.contrib.auth.models import User, auth
@@ -28,44 +28,14 @@ def createRider(request):
             user = User.objects.create_user(username=username, email=email, password=password)
             user.save()
 
-            # user.profile.isRider = True
-            # user.profile.save()
-            # user.save()
+            profile = Profile.objects.create(user = user,isRider = True)
+            profile.save()
             
             return render (request, template_name='pages/home.html')
             
     
     return render(request, template_name='accounts/login.html') 
-def createDriver(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        cpassword = request.POST.get('cpassword')
 
-
-        if password==cpassword and uniqueUserName(username) and len(password) > 3 and len(email)>1 : 
-            user = User.objects.create_user(username=username, email=email, password=password)
-            user.save()
-            context = { 
-                    'title':'Welcome',
-                    'm1': username,
-                    'm2':'your Driver account created successfully',
-                    'm3':'Make sure to remember your username or password to Login',
-                    'url':'home',
-                }
-            return render(request , 'notification/message.html' , context)
-        else:
-            
-            context = { 
-                    'title':'Fail!',
-                    'm1' : 'Account already exists with this Username! or Confirm Password is wrong',
-                    'm2': 'Try again',
-                    'url':'home',
-                }
-            return render(request , 'notification/message.html' , context)
-        
-    return render(request , template_name='pages/home.html')
 
 def uniqueUserName(uname):
     users = User.objects.all()

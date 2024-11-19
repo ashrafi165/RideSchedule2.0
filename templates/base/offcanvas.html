@@ -1,0 +1,58 @@
+    {% load static %}
+    <div class="menu" id="smenu">
+        <span class ="close" onclick="hideMenu()">&times;</span>
+        
+        <h2>{{request.user.username}}</h2>
+        <ul>
+            <li> <a href="{% url 'userProfile' %}"><i class='fas fa-user-circle' style='font-size:16px'></i> Profile</a></li>
+            <li> <a href="#" onclick="showNotification()"><i class="fa fa-bell-o"></i> Notification</a></li>
+            <li> <a href="#"><i class='fas fa-lock'></i> Change Password</a></li>
+            <hr>
+            <li> <a href="#"><i class="fa fa-calendar"></i> All Schedule</a></li>
+            <li> <a href="#"><i class="fa fa-money"></i> Payment</a></li>
+            <li> <a href="#"><i class="fa fa-history"></i> History</a></li>
+            <li> <a href="#"><i class="fa fa-home"></i> Saved Address</a></li>
+            <li> <a href="#"><i class='fas fa-user-shield' style='font-size:15px;color:white'></i> Privacy</a></li>
+            <li> <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a></li>
+            <li> <a href="#"><i class="fa fa-globe"></i> Language</a></li>
+            <hr>
+            <li> <a href="#"><i class='far fa-question-circle'></i> Help</a></li>
+            <li> <a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+            <li> <a href="{% url 'logOutUser' %}"><i class="fa fa-sign-out"></i> Log out</a></li>
+
+        </ul>
+        
+    </div>
+    <div class="notification" id="nmenu">
+        <span class ="close" onclick="hideNotification()">&times;</span>
+        <h2>Notifications</h2>
+        <ul> 
+            {% comment %} {% for n in notification %}
+                {% if n.user_id == request.user.profile %}
+                    <li> <a href="{% url 'deleteNotification' n.id %}"> {{n.message}} </a></li>
+                {% endif %}
+            {% endfor %} {% endcomment %}
+            
+        </ul>
+        
+    </div>
+    <script type="text/javascript">
+        function showMenu(){
+            var m=document.getElementById('smenu');
+            m.classList.add('showMenu');
+        }
+        function hideMenu(){
+            var m=document.getElementById('smenu');
+            m.classList.remove('showMenu');
+        }
+        function hideNotification(){
+            showMenu();
+            var n=document.getElementById('nmenu');
+            n.classList.remove('showMenu');
+        }
+        function showNotification(){
+            hideMenu();
+            var m=document.getElementById('nmenu');
+            m.classList.add('showMenu');
+        }
+    </script>

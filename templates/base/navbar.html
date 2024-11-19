@@ -65,8 +65,9 @@
                             <li><a href="#">Rate Us</a></li>
                             
                             <li><a href="#">Policies</a></li>
-                            <li><a href="#">Emergency Support</a></li>
-                            
+                        {% if user.is_authenticated %}
+                            <li><a href="{% url 'logOutUser' %}">Logout</a></li>
+                        {% endif %}   
 
                         </ul>
 
@@ -79,11 +80,13 @@
             <i class='fa fa-user'></i>
              {% if user.is_authenticated %}
                 <div><span>{{request.user}}</span></div>
+                <div onclick="showMenu()" ><img  src="{%  static 'image/icon/profile.png' %}" height="50" width="50" alt="logo"></div>
              {% else %}
                 <div><a href="{% url 'loginUser' %}"><span>Login</span></a></div>
+                <div  ><a href="{% url 'userProfile' %}"><img  src="{%  static 'image/icon/profile.png' %}" height="50" width="50" alt="logo"></a></div>
              {% endif %}
 
-            <div><a href="{% url 'userProfile' %}"><img  src="{%  static 'image/icon/profile.png' %}" height="50" width="50" alt="logo"></a></div>
+            
         
         </div>
 

@@ -12,6 +12,7 @@
 
     <link rel = "stylesheet" href = "{% static 'css/style.css' %}">
     <link rel = "stylesheet" href = "{% static 'css/navbar.css' %}">
+    <link rel = "stylesheet" href = "{% static 'css/offcanvas.css' %}">
     <link rel = "stylesheet" href = "{% static 'css/login.css' %}">
     <link rel = "stylesheet" href = "{% static 'css/makeSchedule.css' %}">
     <link rel = "stylesheet" href = "{% static 'css/userProfile.css' %}">
@@ -20,7 +21,7 @@
 </head>
 
 {% include "../base/navbar.html" %}
-
+{% include "../base/offcanvas.html" %}
 {% block content %}
 
 {% endblock %}
