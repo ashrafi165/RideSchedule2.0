@@ -130,7 +130,7 @@ main.postTable {
 }
 
 
-table {
+.tableBodyPost{
     width: 100%;
 }
 
@@ -143,7 +143,7 @@ td img {
     vertical-align: middle;
 }
 
-table, th, td {
+.tableBodyPost, th, td {
     border-collapse: collapse;
     padding: 1rem;
     text-align: left;
@@ -158,38 +158,38 @@ thead th {
     text-transform: capitalize;
 }
 
-tbody tr:nth-child(even) {
+.tableBodyPostBody tr:nth-child(even) {
     background-color: #0000000b;
 }
 
-tbody tr {
+.tableBodyPostBody tr {
     --delay: .1s;
     transition: .5s ease-in-out var(--delay), background-color 0s;
 }
 
-tbody tr.hide {
+.tableBodyPostBody tr.hide {
     opacity: 0;
     transform: translateX(100%);
 }
 
-tbody tr:hover {
+.tableBodyPostBody tr:hover {
     background-color: #fff6 !important;
 }
 
-tbody tr td,
-tbody tr td p,
-tbody tr td img {
+.tableBodyPostBody tr td,
+.tableBodyPostBody tr td p,
+.tableBodyPostBody tr td img {
     transition: .2s ease-in-out;
 }
 
-tbody tr.hide td,
-tbody tr.hide td p {
+.tableBodyPostBody tr.hide td,
+.tableBodyPostBody tr.hide td p {
     padding: 0;
     font: 0 / 0 sans-serif;
     transition: .2s ease-in-out .5s;
 }
 
-tbody tr.hide td img {
+.tableBodyPostBody tr.hide td img {
     width: 0;
     height: 0;
     transition: .2s ease-in-out .5s;
@@ -261,78 +261,4 @@ thead th.active,tbody td.active {
     color: #6c00bd;
 }
 
-.export__file {
-    position: relative;
-}
 
-.export__file .export__file-btn {
-    display: inline-block;
-    width: 2rem;
-    height: 2rem;
-    background: #fff6 url(images/export.png) center / 80% no-repeat;
-    border-radius: 50%;
-    transition: .2s ease-in-out;
-}
-
-.export__file .export__file-btn:hover { 
-    background-color: #fff;
-    transform: scale(1.15);
-    cursor: pointer;
-}
-
-.export__file input {
-    display: none;
-}
-
-.export__file .export__file-options {
-    position: absolute;
-    right: 0;
-    
-    width: 12rem;
-    border-radius: .5rem;
-    overflow: hidden;
-    text-align: center;
-
-    opacity: 0;
-    transform: scale(.8);
-    transform-origin: top right;
-    
-    box-shadow: 0 .2rem .5rem #0004;
-    
-    transition: .2s;
-}
-
-.export__file input:checked + .export__file-options {
-    opacity: 1;
-    transform: scale(1);
-    z-index: 100;
-}
-
-.export__file .export__file-options label{
-    display: block;
-    width: 100%;
-    padding: .6rem 0;
-    background-color: #f2f2f2;
-    
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-    transition: .2s ease-in-out;
-}
-
-.export__file .export__file-options label:first-of-type{
-    padding: 1rem 0;
-    background-color: #86e49d !important;
-}
-
-.export__file .export__file-options label:hover{
-    transform: scale(1.05);
-    background-color: #fff;
-    cursor: pointer;
-}
-
-.export__file .export__file-options img{
-    width: 2rem;
-    height: auto;
-}

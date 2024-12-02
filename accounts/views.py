@@ -21,10 +21,10 @@ def userProfile(request):
 def createRider(request):
     if request.method == 'POST':
         is_rider = request.POST.get('isRider')
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        cpassword = request.POST.get('cpassword')
+        username = request.POST.get('usernameSignUp')
+        email = request.POST.get('emailSignUp')
+        password = request.POST.get('passwordSignUp')
+        cpassword = request.POST.get('cpasswordSignUp')
         print("this is Rider")
         print(is_rider)
         if (password==cpassword and uniqueUserName(username) and len(password) > 3 and len(email)>10):
