@@ -33,6 +33,8 @@ urlpatterns = [
     
     path('weeklySchedule',s_view.weeklySchedule,name='weeklySchedule'),
     path('userProfile',a_view.userProfile,name='userProfile'),
+    
+    path('schedulePost',s_view.schedulePost,name = 'schedulePost'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -42,3 +42,16 @@ def weeklySchedule(request):
 
 
     return render(request,'schedule/weeklySchedule.html')
+
+def schedulePost(request):
+    return render(request,'schedule/schedulePost.html')
+
+
+def schedulePost(request):
+    schedulePost = Schedule.objects.all().order_by("pickUp_time")
+
+    posts = {
+        'schedulePost': schedulePost,
+        
+    }
+    return render(request, template_name='schedule/SchedulePost.html', context=posts)
