@@ -8,7 +8,7 @@
       <div class="scheduleContainer">
          <div class="form">
             <form action="{% url 'weeklySchedule' %}" method="POST">
-
+            {% csrf_token %}
                
                <div>
                   <span>Set your Ride location</span>

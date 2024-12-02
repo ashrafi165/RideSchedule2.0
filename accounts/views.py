@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render ,redirect
-from accounts.models import Profile, Schedule ,Notification
+from accounts.models import Profile,Notification
+from schedules.models import Schedule
 
 from .forms import *
 from django.contrib.auth.models import User, auth
@@ -19,17 +20,22 @@ def userProfile(request):
 
 def createRider(request):
     if request.method == 'POST':
+        is_rider = request.POST.get('isRider')
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
         cpassword = request.POST.get('cpassword')
-        
-        if password==cpassword and uniqueUserName(username) and len(password) > 3 and len(email)>10:
+        print("this is Rider")
+        print(is_rider)
+        if (password==cpassword and uniqueUserName(username) and len(password) > 3 and len(email)>10):
             user = User.objects.create_user(username=username, email=email, password=password)
             user.save()
 
-            profile = Profile.objects.create(user = user,isRider = True)
+            is_rider_bool = is_rider == "True"
+            
+            profile = Profile.objects.create(user=user, isRider=is_rider_bool)
             profile.save()
+            
             
             return render (request, template_name='pages/home.html')
             
