@@ -9,11 +9,15 @@
         <!-- ===== ===== Header/Navbar ===== ===== -->
         
 
-
         <!-- ===== ===== User Main-Profile ===== ===== -->
         <section class="userProfile card">
             <div class="profile">
-                <figure><img src="profile.png" alt="profile" width="250px" height="250px"></figure>
+            {% if request.user.profile.image %}
+                <figure><img src="{{request.user.profile.image.url}}" width="250px" height="250px" alt="logo"></figure>
+            {% else %}
+                <figure><img  src="{%  static 'image/icon/profile.png' %}" width="250px" height="250px" alt="logo"></figure>
+            {% endif %}
+
             </div>
         </section>
 
@@ -53,7 +57,7 @@
         <!-- ===== ===== User Details Sections ===== ===== -->
         <section class="userDetails card">
             <div class="userName">
-                <h1 class="name">Jeremy Rose</h1>
+                <h1 class="name">{{request.user.first_name}} {{request.user.last_name}}</h1>
                 <div class="map">
                     <i class="ri-map-pin-fill ri"></i>
                     <span>New York, NY</span>

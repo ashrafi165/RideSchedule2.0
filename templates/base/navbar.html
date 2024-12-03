@@ -10,21 +10,23 @@
                 <li><a href="#" class="service fix">Service <i class="fas fa-angle-down" style="font-size:12px;"></i> </a>
                     <div class="dropdown" >
                         <ul >
-                            
-                            <li><a href="#">Daily Schedule</a></li>
+                            {% if user.is_authenticated %} 
+                                {% if request.user.profile.isRider %}
+                                    <li><a href="#">Daily Schedule</a></li>
 
-                            <li><a href="{% url 'weeklySchedule' %}">Weekly Schedule</a></li>
-                            <li><a href="#">Monthly Schedule</a></li><hr>
-                            <li><a href="#">Custom Schedule</a></li>
-                                
-                            <li><a href="{% url 'schedulePost' %}">Take a Schedule</a></li>
-                            <li><a href="#">Policies</a></li>
-                            <li><a href="#">Emergency Support</a></li><hr>
+                                    <li><a href="{% url 'weeklySchedule' %}">Weekly Schedule</a></li>
+                                    <li><a href="#">Monthly Schedule</a></li><hr>
+                                    <li><a href="#">Custom Schedule</a></li>
+                                {% else %}
+                                    <li><a href="{% url 'schedulePost' %}">Take a Schedule</a></li>
+                                    <li><a href="#">Policies</a></li>
+                                    <li><a href="#">Emergency Support</a></li><hr>
+                                {% endif %}
+                            {% else %}
+                                    <li><a href="#">Policies</a></li>
+                                    <li><a href="#">Emergency Support</a></li>
                             
-                            <li><a href="#">Policies</a></li>
-                            <li><a href="#">Emergency Support</a></li>
-                            
-
+                             {% endif %}
                         </ul>
 
                     </div>
@@ -65,9 +67,7 @@
                             <li><a href="#">Rate Us</a></li>
                             
                             <li><a href="#">Policies</a></li>
-                        {% if user.is_authenticated %}
-                            <li><a href="{% url 'logOutUser' %}">Logout</a></li>
-                        {% endif %}   
+                          
 
                         </ul>
 
@@ -76,15 +76,26 @@
             </ul>
         </div>
         <div class="profile" >
-                        
-            <i class='fa fa-user'></i>
-             {% if user.is_authenticated %}
+             {% if user.is_authenticated %} 
+                {% if request.user.profile.isRider %}            
+                    <i class='fa fa-user'></i>
+                {% else %} 
+                
+                <i class='fa fa-bicycle'></i>
+                {% endif %} 
+
+             
                 <div><span>{{request.user}}</span></div>
-                <div onclick="showMenu()" ><img  src="{%  static 'image/icon/profile.png' %}" height="50" width="50" alt="logo"></div>
-             {% else %}
-                <div><a href="{% url 'loginUser' %}"><span>Login</span></a></div>
-                <div  ><a href="{% url 'userProfile' %}"><img  src="{%  static 'image/icon/profile.png' %}" height="50" width="50" alt="logo"></a></div>
-             {% endif %}
+                
+                {% if request.user.profile.image %}        
+                    <div onclick="showMenu()"><img  src="{{request.user.profile.image.url}}" height="50" width="50" alt="logo"></div>
+                {% else %}
+                    <div onclick="showMenu()"><img  src="{%  static 'image/icon/profile.png' %}" height="50" width="50" alt="logo"></div>
+                {% endif %}
+            {% else %}
+            <div><a href="{% url 'loginUser' %}"> <span>Login</span></a></div>
+            <div><img  src="{%  static 'image/icon/profile.png' %}" height="50" width="50" alt="logo"></div>
+            {% endif %}
 
             
         
@@ -92,3 +103,4 @@
 
     </nav>
 </nav>
+

@@ -16,7 +16,7 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-# @login_required(login_url='login')
+@login_required(login_url='login')
 def weeklySchedule(request):
     if request.method == 'POST':
         rider = request.user.profile
@@ -43,10 +43,10 @@ def weeklySchedule(request):
 
     return render(request,'schedule/weeklySchedule.html')
 
-def schedulePost(request):
-    return render(request,'schedule/schedulePost.html')
 
 
+
+@login_required(login_url='login')
 def schedulePost(request):
     schedulePost = Schedule.objects.all().order_by("pickUp_time")
 
