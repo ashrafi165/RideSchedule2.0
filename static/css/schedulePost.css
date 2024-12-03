@@ -43,9 +43,9 @@ main{
 main.postTable {
     width: 92%;
     height: 90vh;
-    background-color: #fff5;
+    background-color: rgba(255, 255, 255, 0.658);
 
-    backdrop-filter: blur(7px);
+    backdrop-filter: blur(10px);
     box-shadow: 0 .4rem .8rem #0005;
     border-radius: .8rem;
 
@@ -60,7 +60,7 @@ main.postTable {
 .table__header {
     width: 100%;
     height: 10%;
-    background-color: #fff4;
+    background-color: rgba(141, 212, 240, 0.753);
     padding: .8rem 1rem;
 
     display: flex;
@@ -173,8 +173,9 @@ thead th {
 }
 
 .tableBodyPostBody tr:hover {
-    background-color: #fff6 !important;
+    background-color: rgba(185, 233, 248, 0.938) !important;
 }
+
 
 .tableBodyPostBody tr td,
 .tableBodyPostBody tr td p,
