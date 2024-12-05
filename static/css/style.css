@@ -53,8 +53,24 @@ body{
   background-color: #2fb2c9;
 }
 
-
-
+.greenButton {
+   border: none;
+   background-color: #64d655;
+   color: white;
+   padding: 10px ;
+   padding-left: 20px;
+   padding-right: 20px;
+   text-align: center;
+   text-decoration: none;
+   font-size: 16px;
+   cursor: pointer;
+   border-radius: 25px;
+  
+}
+.greenButton:hover{
+   background-color: #eb923e;
+   color: black;
+}
 
 .form-control-field{
    

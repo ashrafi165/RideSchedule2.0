@@ -50,7 +50,7 @@
                         </td>
                         <td> {{p.type_of_schedule}}</strong></td>
                         <td> <strong> {{p.price}}TK </strong></td>
-                        <td> </td>
+                        <td><a href="{% url 'takeSchedule' p.id %}" class="greenButton">Accept</a></td>
                     </tr>
                     {% endif %}
                 {% endfor %}

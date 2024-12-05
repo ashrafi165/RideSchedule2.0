@@ -122,3 +122,21 @@ def userPost(request):
     return render(request, template_name='accounts/userPost.html', context=posts)
 
 
+@login_required(login_url='login')
+def takeSchedule(request , id):
+    schedule= Schedule.objects.get(pk = id)
+    
+    context={
+        'title':'Take Schedule',
+        'm2':'Do you want to take this schedule?',
+        'text1': 'From: '+schedule.pickup_from +'\n To: '+schedule.drop_to,
+        'text2': 'Price: '+str(schedule.price)+'TK',
+        'url':'schedulePost',
+    }
+    if request.method == 'POST':
+        schedule.pending = False
+        schedule.driver_id = request.user.username
+        schedule.save()
+        
+        return redirect('schedulePost')
+    return render(request, 'notification/confirm.html',context)
