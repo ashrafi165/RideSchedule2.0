@@ -25,6 +25,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',b_view.home,name='home'),
+    path('home',b_view.home,name='home'),
     
     path('loginUser',a_view.loginUser,name='loginUser'),
     path('logOutUser', a_view.logOutUser, name='logOutUser'),
@@ -32,9 +33,13 @@ urlpatterns = [
     
     
     path('weeklySchedule',s_view.weeklySchedule,name='weeklySchedule'),
+    path('dailySchedule',s_view.dailySchedule, name='dailySchedule'),
+    path('monthlySchedule',s_view.monthlySchedule, name='monthlySchedule'),
+    
     path('userProfile',a_view.userProfile,name='userProfile'),
     
     path('schedulePost',s_view.schedulePost,name = 'schedulePost'),
+    path('userPost',s_view.userPost,name = 'userPost'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

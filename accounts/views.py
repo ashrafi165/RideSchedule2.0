@@ -35,9 +35,24 @@ def createRider(request):
             
             profile = Profile.objects.create(user=user, isRider=is_rider_bool)
             profile.save()
+            context = { 
+                    'title':'Welcome',
+                    'm1': username,
+                    'm2':'your Driver account created successfully',
+                    'm3':'Make sure to remember your username or password to Login',
+                    'url':'home',
+                }
+            return render(request , 'notification/message.html' , context)
             
+        else:
             
-            return render (request, template_name='pages/home.html')
+            context = { 
+                    'title':'Fail!',
+                    'm1' : 'Account already exists with this Username! or Confirm Password is wrong',
+                    'm2': 'Try again',
+                    'url':'home',
+                }
+            return render(request , 'notification/message.html' , context)
             
     
     return render(request, template_name='accounts/login.html') 
@@ -63,13 +78,13 @@ def loginUser(request):
             if user is not None:
                 login(request,user)
                 return redirect('/')
-            # else:
-            #     context = { 
-            #         'title':'Fail!',
-            #         'm1': 'wrong password or username does not exists',
-            #         'url':'home',
-            #     }
-            #     return render(request , 'notification/message.html' , context)
+            else:
+                context = { 
+                    'title':'Fail!',
+                    'm1': 'wrong password or username does not exists',
+                    'url':'home',
+                }
+                return render(request , 'notification/message.html' , context)
 
         
         return render(request, template_name='accounts/login.html')
