@@ -2,13 +2,14 @@
 {% load static %}
 {% block content %}
 <div class="imagediv">
-    <img src="{%  static 'image/background/bg3.png' %}" height="1080px" width="1920px" alt="bg">
+    <img src="{%  static 'image/background/bg3.png' %}" height="100%" width="100%" alt="bg">
 </div>
-<div class="container">
+<div class="containerSchedule">
+      <div class="scheduleContainer">
          <div class="form">
             <form action="{% url 'dailySchedule' %}" method="POST">
 
-               {% csrf_token %}
+               {% csrf_token %} 
                <div>
                   <span>Set your Ride location</span>
                </div>
@@ -85,7 +86,7 @@
             </form>
          </div>
       </div>
-
+   </div>
 
       
 

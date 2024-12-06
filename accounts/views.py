@@ -95,3 +95,36 @@ def loginUser(request):
 def logOutUser(request):
     auth.logout(request)
     return redirect('/')
+
+@login_required(login_url='login')
+def profileUpdate(request):
+    formU = UserForm()
+    formP = ProfileForm()
+    user = User.objects.get(username = request.user.username)
+    print(user)
+
+    pro = Profile.objects.get( user = user)
+    print(pro)
+    formU = UserForm(instance = user)
+    formP = ProfileForm(instance = pro)
+    if request.method == 'POST':
+        formU = UserForm(request.POST, request.FILES, instance=user)
+        formP = ProfileForm(request.POST, request.FILES, instance=pro)
+        if formP.is_valid():
+            formP.save()
+        if formU.is_valid():
+            formU.save()
+        context = { 
+            'title':'Successfull',
+            'm1': request.user.username,
+            'm2':'your profile Update Successfull',
+            'url':'userProfile',
+            }
+        return render(request , 'notification/message.html' , context)
+
+    context = {
+        'formP':formP,
+        'formU':formU
+    }
+
+    return render(request, 'update/profileUpdate.html',context)

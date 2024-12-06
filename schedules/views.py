@@ -140,3 +140,17 @@ def takeSchedule(request , id):
         
         return redirect('schedulePost')
     return render(request, 'notification/confirm.html',context)
+
+
+@login_required(login_url='login')
+def deleteSchedule(request , id):
+    schedule = Schedule.objects.get(pk = id)
+    context={
+        'title':'Delete Schedule',
+        'm1':'are your sure?',
+        'url':'allPostSchedule',
+    }
+    if request.method == 'POST':
+        schedule.delete()
+        return redirect('userPost')
+    return render(request, 'notification/confirm.html',context)

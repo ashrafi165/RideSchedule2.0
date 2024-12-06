@@ -30,7 +30,7 @@ urlpatterns = [
     path('loginUser',a_view.loginUser,name='loginUser'),
     path('logOutUser', a_view.logOutUser, name='logOutUser'),
     path('createRider', a_view.createRider , name = 'createRider'),
-    
+    path('profileUpdate', a_view.profileUpdate, name='profileUpdate'),
     
     path('weeklySchedule',s_view.weeklySchedule,name='weeklySchedule'),
     path('dailySchedule',s_view.dailySchedule, name='dailySchedule'),
@@ -41,6 +41,7 @@ urlpatterns = [
     path('schedulePost',s_view.schedulePost,name = 'schedulePost'),
     path('userPost',s_view.userPost,name = 'userPost'),
     path('takeSchedule <str:id>',s_view.takeSchedule,name='takeSchedule'),
+    path('deleteSchedule <str:id>',s_view.deleteSchedule,name='deleteSchedule'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

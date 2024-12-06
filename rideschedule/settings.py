@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'base.apps.BaseConfig',
     'schedules.apps.SchedulesConfig',
     'accounts.apps.AccountsConfig',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
