@@ -14,9 +14,11 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
+from schedules.decorators import rider_required , driver_required
+
 # Create your views here.
 
-@login_required(login_url='login')
+@rider_required(redirect_url='home')
 def weeklySchedule(request):
     if request.method == 'POST':
         rider = request.user.profile
@@ -46,7 +48,7 @@ def weeklySchedule(request):
 
     return render(request,'schedule/weeklySchedule.html')
 
-@login_required(login_url='login')
+@rider_required(redirect_url='home')
 def monthlySchedule(request):
     if request.method == 'POST':
         rider = request.user.profile
@@ -77,7 +79,7 @@ def monthlySchedule(request):
 
     return render(request,'schedule/monthlySchedule.html')
 
-@login_required(login_url='login')
+@rider_required(redirect_url='home')
 def dailySchedule(request):
     if request.method == 'POST':
         rider = request.user.profile
@@ -101,7 +103,7 @@ def dailySchedule(request):
     return render(request,'schedule/dailySchedule.html')
 
 
-@login_required(login_url='login')
+@driver_required(redirect_url='home')
 def schedulePost(request):
     schedulePost = Schedule.objects.all().order_by("pickUp_time")
 
@@ -122,7 +124,7 @@ def userPost(request):
     return render(request, template_name='accounts/userPost.html', context=posts)
 
 
-@login_required(login_url='login')
+@driver_required(redirect_url='home')
 def takeSchedule(request , id):
     schedule= Schedule.objects.get(pk = id)
     
