@@ -130,3 +130,23 @@ def profileUpdate(request):
     }
 
     return render(request, 'update/profileUpdate.html',context)
+
+@login_required(login_url='login')
+def changePassword(request):
+    form = ChangePassword()
+    user = User.objects.get(username = request.user.username)
+
+    form = ChangePassword(instance = user)
+
+    if request.method == 'POST':
+        form = ChangePassword(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            context = { 
+            'title':'Successfull',
+            'm1': 'Password change successfull',
+            'url':'home',
+            }
+            return render(request , 'notification/message.html' , context)
+        return redirect('/')
+    return render(request, 'update/changePassword.html',{'form': form})

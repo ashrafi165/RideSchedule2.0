@@ -156,3 +156,25 @@ def deleteSchedule(request , id):
         schedule.delete()
         return redirect('userPost')
     return render(request, 'notification/confirm.html',context)
+
+
+@login_required(login_url='login')
+def updateSchedule(request, id):
+    try:
+        schedule = Schedule.objects.get(pk = id)
+        form = ScheduleForm(instance=schedule)
+    
+        if request.method == 'POST':
+            form = ScheduleForm(request.POST, request.FILES, instance=schedule)
+            if form.is_valid():
+                form.save()
+                context = { 
+                'title':'Successfull',
+                'm1': request.user.username,
+                'm2':'your schedule Update Successfull',
+                'url':'allPostSchedule',
+                }
+                return render(request , 'notification/message.html' , context)
+        return render(request, 'update/updateSchedule.html',{'form': form })
+    except:
+        return render(request, 'update/updateSchedule.html')

@@ -31,6 +31,8 @@ urlpatterns = [
     path('logOutUser', a_view.logOutUser, name='logOutUser'),
     path('createRider', a_view.createRider , name = 'createRider'),
     path('profileUpdate', a_view.profileUpdate, name='profileUpdate'),
+    path('changePassword',a_view.changePassword, name='changePassword'),
+    
     
     path('weeklySchedule',s_view.weeklySchedule,name='weeklySchedule'),
     path('dailySchedule',s_view.dailySchedule, name='dailySchedule'),
@@ -42,6 +44,7 @@ urlpatterns = [
     path('userPost',s_view.userPost,name = 'userPost'),
     path('takeSchedule <str:id>',s_view.takeSchedule,name='takeSchedule'),
     path('deleteSchedule <str:id>',s_view.deleteSchedule,name='deleteSchedule'),
+    path('updateSchedule <str:id>',s_view.updateSchedule,name='updateSchedule'),
     
     path('policy', b_view.policy, name = 'policy'),
     path('rateUs', b_view.rateUs, name = 'rateUs'),
