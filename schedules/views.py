@@ -172,7 +172,7 @@ def updateSchedule(request, id):
                 'title':'Successfull',
                 'm1': request.user.username,
                 'm2':'your schedule Update Successfull',
-                'url':'allPostSchedule',
+                'url':'userPost',
                 }
                 return render(request , 'notification/message.html' , context)
         return render(request, 'update/updateSchedule.html',{'form': form })
