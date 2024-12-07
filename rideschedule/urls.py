@@ -42,6 +42,11 @@ urlpatterns = [
     path('userPost',s_view.userPost,name = 'userPost'),
     path('takeSchedule <str:id>',s_view.takeSchedule,name='takeSchedule'),
     path('deleteSchedule <str:id>',s_view.deleteSchedule,name='deleteSchedule'),
+    
+    path('policy', b_view.policy, name = 'policy'),
+    path('rateUs', b_view.rateUs, name = 'rateUs'),
+    path('help', b_view.help , name = 'help'),
+    path('contact', b_view.contact , name = 'contact'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
