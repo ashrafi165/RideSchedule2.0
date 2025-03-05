@@ -16,7 +16,7 @@
 
                                     <li><a href="{% url 'weeklySchedule' %}">Weekly Schedule</a></li>
                                     <li><a href="{% url 'monthlySchedule' %}">Monthly Schedule</a></li><hr>
-                                    <li><a href="#">Custom Schedule</a></li>
+                                    <li><a href="{% url 'allService' %}">Others service</a></li>
                                 {% else %}
                                     <li><a href="{% url 'schedulePost' %}">Take a Schedule</a></li>
                                     <li><a href="{% url 'policy' %}">Policies</a></li>

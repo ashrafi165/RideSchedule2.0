@@ -178,3 +178,7 @@ def updateSchedule(request, id):
         return render(request, 'update/updateSchedule.html',{'form': form })
     except:
         return render(request, 'update/updateSchedule.html')
+    
+    
+def allService(request):
+    return render (request, template_name='schedule/allservice.html')

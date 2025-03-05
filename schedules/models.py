@@ -15,8 +15,9 @@ class Schedule(models.Model):
         ('daily','daily'),
         ('weekly', 'weekly'),
         ('monthly', 'monthly'),
+        ('Parcel Delivery', 'Parcel Delivery'),
         ('custom', 'custom'))
-    type_of_schedule = models.CharField(max_length=10,choices=schedule_type,blank=True,null=True)
+    type_of_schedule = models.CharField(max_length=20,choices=schedule_type,blank=True,null=True)
     price = models.IntegerField(blank=True, null=True)
     startDate = models.DateField(blank=True,null=True)
     endDate = models.DateField(blank=True,null=True)
