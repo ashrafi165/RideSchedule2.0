@@ -37,6 +37,7 @@ urlpatterns = [
     path('weeklySchedule',s_view.weeklySchedule,name='weeklySchedule'),
     path('dailySchedule',s_view.dailySchedule, name='dailySchedule'),
     path('monthlySchedule',s_view.monthlySchedule, name='monthlySchedule'),
+    path('parcelDelivery',s_view.parcelDelivery,name='parcelDelivery'),
     path('allService',s_view.allService, name='allService'),
     
     path('userProfile',a_view.userProfile,name='userProfile'),

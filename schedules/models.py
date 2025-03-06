@@ -22,6 +22,7 @@ class Schedule(models.Model):
     startDate = models.DateField(blank=True,null=True)
     endDate = models.DateField(blank=True,null=True)
     weeks = models.CharField(max_length=30,blank=True,null=True)
+    weight = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return self.pickUp_time

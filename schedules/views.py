@@ -88,9 +88,9 @@ def dailySchedule(request):
         drop_to = request.POST.get('droplocation')
         price = request.POST.get('SPrice')
         startDate = request.POST.get('startDate')
-        endDate = request.POST.get('endDate')
+        # endDate = request.POST.get('endDate')
 
-        schedule = Schedule.objects.create(rider_id=rider,pickUp_time=pickUp_time,pickup_from=pickUp_from,drop_to=drop_to,type_of_schedule='daily',price=price,startDate=startDate,endDate=endDate)
+        schedule = Schedule.objects.create(rider_id=rider,pickUp_time=pickUp_time,pickup_from=pickUp_from,drop_to=drop_to,type_of_schedule='daily',price=price,startDate=startDate)
         schedule.save()
         context = { 
             'title':'Successfull',
@@ -182,3 +182,27 @@ def updateSchedule(request, id):
     
 def allService(request):
     return render (request, template_name='schedule/allservice.html')
+
+
+@rider_required(redirect_url='home')
+def parcelDelivery(request):
+    if request.method == 'POST':
+        rider = request.user.profile
+        pickUp_time = request.POST.get('startTime')
+        pickUp_from = request.POST.get('picklocation')
+        drop_to = request.POST.get('droplocation')
+        price = request.POST.get('SPrice')
+        startDate = request.POST.get('startDate')
+        weight = request.POST.get('Sweight')
+
+        schedule = Schedule.objects.create(rider_id=rider,pickUp_time=pickUp_time,pickup_from=pickUp_from,drop_to=drop_to,type_of_schedule='Parcel Delivery',price=price,startDate=startDate,weight=weight)
+        schedule.save()
+        context = { 
+            'title':'Successfull',
+            'm1': 'Parcel Delivery schedule created successfull',
+            'url':'home',
+            }
+        return render(request , 'notification/message.html' , context)
+
+
+    return render(request,'delivery/parcel.html')

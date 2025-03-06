@@ -45,10 +45,19 @@
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 25px rgba(0, 0, 0, 0.08);
     text-align: left;
     padding-left:3%;
+
+    transform: translate(0% , 0%);
+    transition: 0.7s;
     
 }
 .btnService:hover {
     background: #007bb5;
+    width:102%;
+    height:23%;
+    font-size: 25px;
+    color:white;
+    
+    
 }
 
 .schedule-options,
