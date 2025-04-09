@@ -38,6 +38,8 @@ urlpatterns = [
     path('dailySchedule',s_view.dailySchedule, name='dailySchedule'),
     path('monthlySchedule',s_view.monthlySchedule, name='monthlySchedule'),
     path('parcelDelivery',s_view.parcelDelivery,name='parcelDelivery'),
+    path('courier',s_view.courier,name='courier'),
+    path('pharmacy',s_view.pharmacy,name='pharmacy'),
     path('allService',s_view.allService, name='allService'),
     
     path('userProfile',a_view.userProfile,name='userProfile'),
@@ -52,6 +54,7 @@ urlpatterns = [
     path('rateUs', b_view.rateUs, name = 'rateUs'),
     path('help', b_view.help , name = 'help'),
     path('contact', b_view.contact , name = 'contact'),
+    
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

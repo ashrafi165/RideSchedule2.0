@@ -206,3 +206,52 @@ def parcelDelivery(request):
 
 
     return render(request,'delivery/parcel.html')
+
+@rider_required(redirect_url='home')
+def courier(request):
+    if request.method == 'POST':
+        rider = request.user.profile
+        pickUp_time = request.POST.get('startTime')
+        pickUp_from = request.POST.get('picklocation')
+        drop_to = request.POST.get('droplocation')
+        price = request.POST.get('SPrice')
+        startDate = request.POST.get('startDate')
+        weight = request.POST.get('Sweight')
+        phone = request.POST.get('Sphone')
+ 
+        schedule = Schedule.objects.create(rider_id=rider,pickUp_time=pickUp_time,pickup_from=pickUp_from,drop_to=drop_to,type_of_schedule='Courier',price=price,startDate=startDate,weight=weight,phone=phone)
+        schedule.save()
+        context = { 
+            'title':'Successfull',
+            'm1': 'Courier schedule created successfull',
+            'url':'home',
+            }
+        return render(request , 'notification/message.html' , context)
+
+
+    return render(request,'delivery/courier.html')
+
+
+@rider_required(redirect_url='home')
+def pharmacy(request):
+    if request.method == 'POST':
+        rider = request.user.profile
+        pickUp_time = request.POST.get('startTime')
+        pickUp_from = request.POST.get('picklocation')
+        drop_to = request.POST.get('droplocation')
+        price = request.POST.get('SPrice')
+        startDate = request.POST.get('startDate')
+        weight = request.POST.get('Sweight')
+        phone = request.POST.get('Sphone')
+ 
+        schedule = Schedule.objects.create(rider_id=rider,pickUp_time=pickUp_time,pickup_from=pickUp_from,drop_to=drop_to,type_of_schedule='Pharmacy',price=price,startDate=startDate,weight=weight,phone=phone)
+        schedule.save()
+        context = { 
+            'title':'Successfull',
+            'm1': 'Pharmacy schedule created successfull',
+            'url':'home',
+            }
+        return render(request , 'notification/message.html' , context)
+
+
+    return render(request,'delivery/pharmacy.html')
