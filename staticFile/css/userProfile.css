@@ -33,11 +33,9 @@
   --bg5-color: #0099cc;
   --bg6-color: rgba(0, 0, 0, 0.4);
   --bg7-color: rgba(0, 0, 0, 0.2);
-  --glass-bg: linear-gradient(
-    to right bottom,
-    rgba(255, 255, 255, 0.5),
-    rgba(255, 255, 255, 0.3)
-  );
+  --glass-bg: linear-gradient(to right bottom,
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.3));
   --C-lg-bg: linear-gradient(45deg, #ff3399, #ff9933);
 
   /* ===== =====>>  Font Size  <<===== =====  */
@@ -355,7 +353,7 @@ header {
 }
 
 .userDetails .btns ul .active {
-  background: #e6f2ff;
+  background: #1469c4;
   padding: var(--p-0-5) var(--p-1-5);
 }
 
@@ -453,69 +451,78 @@ header {
 
 
 @media screen and (max-width: 1024px) {
-    html {
-      font-size: 9px;
-    }
+  html {
+    font-size: 9px;
   }
-  
-  @media screen and (max-width: 900px) {
-    html {
-      font-size: 8px;
-    }
+}
+
+@media screen and (max-width: 900px) {
+  html {
+    font-size: 8px;
   }
-  
-  @media screen and (max-width: 768px) {
-    html {
-      font-size: 10px;
-    }
-  
-    /* ===== =====>>  Container Css Start  <<===== ===== */
-    .container {
-      grid-template-columns: 1fr;
-      grid-template-areas:
-        "header"
-        "userProfile"
-        "userDetails"
-        "work_skills"
-        "timeline_about";
-      overflow-x: hidden;
-      overflow-y: inherit;
-      padding: 0;
-      width: 90%;
-      height: 100%;
-      box-shadow: none;
-    }
-  
-    /* ===== =====>>  Container Card Css Start  <<===== ===== */
-    .container .card {
-      backdrop-filter: none;
-    }
-  
-    .userDetails {
-      margin-bottom: 3rem;
-    }
-  
-    .container::before,
-    .container::after {
-      display: none;
-    }
-  
-    /* ===== =====>>  Header/Navbar Css Start  <<===== ===== */
-    .container header {
-      padding: 2.5rem;
-    } 
+}
+
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 10px;
   }
-  
-  @media screen and (max-width: 500px) {
-    .container {
-      width: 100%;
-      overflow: initial;
-    }
+
+  /* ===== =====>>  Container Css Start  <<===== ===== */
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "userProfile"
+      "userDetails"
+      "work_skills"
+      "timeline_about";
+    overflow-x: hidden;
+    overflow-y: inherit;
+    padding: 0;
+    width: 90%;
+    height: 100%;
+    box-shadow: none;
   }
-  
-  @media screen and (max-width: 350px) {
-    .main_bg {
-      animation: none;
-    }
+
+  /* ===== =====>>  Container Card Css Start  <<===== ===== */
+  .container .card {
+    backdrop-filter: none;
   }
-  
+
+  .userDetails {
+    margin-bottom: 3rem;
+  }
+
+  .container::before,
+  .container::after {
+    display: none;
+  }
+
+  /* ===== =====>>  Header/Navbar Css Start  <<===== ===== */
+  .container header {
+    padding: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    width: 100%;
+    overflow: initial;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .main_bg {
+    animation: none;
+  }
+}
+
+.profileButton {
+  background-color: #0099cc !important;
+  padding: 20px;
+}
+
+.sendMsg a {
+  background-color: #0099cc !important;
+  padding: 20px;
+}

@@ -2,21 +2,22 @@
 {% load static %}
 {% block content %}
 <div class="userProfileMain">
-    
+
     <!-- ===== ===== Main-Container ===== ===== -->
     <div class="container">
 
         <!-- ===== ===== Header/Navbar ===== ===== -->
-        
+
 
         <!-- ===== ===== User Main-Profile ===== ===== -->
         <section class="userProfile card">
             <div class="profile">
-            {% if request.user.profile.image %}
+                {% if request.user.profile.image %}
                 <figure><img src="{{request.user.profile.image.url}}" width="250px" height="250px" alt="logo"></figure>
-            {% else %}
-                <figure><img  src="{%  static 'image/icon/profile.png' %}" width="250px" height="250px" alt="logo"></figure>
-            {% endif %}
+                {% else %}
+                <figure><img src="{%  static 'image/icon/profile.png' %}" width="250px" height="250px" alt="logo">
+                </figure>
+                {% endif %}
 
             </div>
         </section>
@@ -27,22 +28,24 @@
 
             <!-- ===== ===== Work Contaienr ===== ===== -->
             <div class="work">
-                <h1 >User Name: {{request.user.username}} </h1>
+                <h1 style="font-size: 175%;">Basic Information</h1>
+                <br>
+                <h1>User Name: {{request.user.username}} </h1>
 
                 <div class="basic_info">
-                <h1 >Basic Information</h1>
-                <ul>
-                    <li class="birthday">
-                        <h1 class="label">Birthday:</h1>
-                        <span class="info">Dec 25, 2000</span>
-                    </li>
+                    <ul>
+                        <li class="birthday">
+                            <b class="label">Birthday:</b>
+                            {{request.user.birthday}}
 
-                    <li class="sex">
-                        <h1 class="label">Country:</h1>
-                        <span class="info">{{request.user.profile.country}}</span>
-                    </li>
-                </ul>
-            </div>
+                        </li>
+
+                        <li class="sex">
+                            <b class="label">Country:</b>
+                            {{request.user.profile.country}}
+                        </li>
+                    </ul>
+                </div>
                 {% comment %} <div class="primary">
                     <h1>Spotify New York</h1>
                     <span>Primary</span>
@@ -57,7 +60,7 @@
             </div>
 
 
-            
+
         </section>
 
 
@@ -67,20 +70,21 @@
                 <h1 class="name">{{request.user.first_name}} {{request.user.last_name}}</h1>
                 <div class="map">
                     <i class="ri-map-pin-fill ri"></i>
-                    
+
                 </div>
-                {% if request.user.profile.isRider %}            
-                    <p><i class='fa fa-user'></i> Rider</p>
-                {% else %} 
-                
+                <br>
+                {% if request.user.profile.isRider %}
+                <p><i class='fa fa-user'></i> Rider</p>
+                {% else %}
+
                 <p><i class='fa fa-bicycle'></i> Driver</p>
-                {% endif %} 
-                
+                {% endif %}
+
             </div>
 
             <div class="rank">
-                <h1 class="heading">Rating</h1>
-                <span>{{request.user.profile.rate}}/5.0</span>
+                <b>Rating :</b>
+                {{request.user.profile.rate}}/5.0
                 <div class="rating">
                     <i class="ri-star-fill rate"></i>
                     <i class="ri-star-fill rate"></i>
@@ -93,17 +97,12 @@
             <div class="btns">
                 <ul>
                     <li class="sendMsg">
-                        <i class="ri-chat-4-fill ri"></i>
-                        <a href="#">Send Message</a>
-                    </li>
-
-                    <li class="sendMsg active">
-                        <i class="ri-check-fill ri"></i>
-                        <a href="#">Contacts</a>
+                        <a href="#" class="profileButton">Send Message</a>
                     </li>
 
                     <li class="sendMsg">
-                        <a href="#">Report User</a>
+                        <a href="#" class="profileButton">Report User</a>
+
                     </li>
                 </ul>
             </div>
@@ -114,10 +113,7 @@
         <section class="timeline_about card">
             <div class="tabs">
                 <ul>
-                    <li class="timeline">
-                        <i class="ri-eye-fill ri"></i>
-                        <span>Timeline</span>
-                    </li>
+
 
                     <li class="about active">
                         <i class="ri-user-3-fill ri"></i>
@@ -127,35 +123,33 @@
             </div>
 
             <div class="contact_Info">
-                <h1 class="heading">Contact Information</h1>
+                <h1 style="font-size: 172%;">Contact Information</h1>
+                <br>
                 <ul>
                     <li class="phone">
-                        <h1 class="label">Phone:</h1>
-                        <span class="info">{{request.user.profile.phone}}</span>
+                        <b>Phone:</b>
+                        {{request.user.profile.phone}}
                     </li>
 
                     <li class="address">
-                        <h1 class="label">Address:</h1>
-                        <span class="info">{{request.user.profile.address}}</span>
+                        <b>Address:</b>
+                        {{request.user.profile.address}}
                     </li>
 
                     <li class="email">
-                        <h1 class="label">E-mail:</h1>
-                        <span class="info">{{request.user.email}}</span>
+                        <b>E-mail:</b>
+                        {{request.user.email}}
                     </li>
 
-                    <li class="site">
-                        <h1 class="label">Site:</h1>
-                        <span class="info">www.rsmarquetech.com</span>
-                    </li>
+
                 </ul>
             </div>
 
-            
+
         </section>
     </div>
 
 
-      
 
-{% endblock %}
+
+    {% endblock %}

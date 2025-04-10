@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import render ,redirect
-from accounts.models import Profile,Notification
+from accounts.models import Profile,Notification,Rate
 from schedules.models import Schedule
 
 from .forms import *
@@ -10,6 +10,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+
 
 
 # Create your views here.
