@@ -48,10 +48,12 @@ urlpatterns = [
     path('userPost',s_view.userPost,name = 'userPost'),
     path('takeSchedule <str:id>',s_view.takeSchedule,name='takeSchedule'),
     path('deleteSchedule <str:id>',s_view.deleteSchedule,name='deleteSchedule'),
+    path('completeSchedule <str:id>',s_view.completeSchedule,name='completeSchedule'),
     path('updateSchedule <str:id>',s_view.updateSchedule,name='updateSchedule'),
     
     path('policy', b_view.policy, name = 'policy'),
     path('rateUs', b_view.rateUs, name = 'rateUs'),
+    path('rateDriver <str:id> <str:scheduleid>', a_view.rateDriver, name = 'rateDriver'),
     path('help', b_view.help , name = 'help'),
     path('contact', b_view.contact , name = 'contact'),
     

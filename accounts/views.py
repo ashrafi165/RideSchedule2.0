@@ -151,3 +151,41 @@ def changePassword(request):
             return render(request , 'notification/message.html' , context)
         return redirect('/')
     return render(request, 'update/changePassword.html',{'form': form})
+
+
+@login_required(login_url='login')
+def rateDriver(request,id,scheduleid):
+    user = User.objects.get(username = id)
+    print(id)
+    print(user)
+    profile = Profile.objects.get(user = user)
+    print(profile)
+    schedule = Schedule.objects.get(pk=scheduleid)
+    context={
+        'id': id,
+        'scheduleid':scheduleid,
+    }
+    if request.method == 'POST':
+        rating = request.POST.get('rate') 
+        if profile.rateCount:
+            temp = profile.rate*profile.rateCount
+            profile.rateCount=profile.rateCount+1
+            print(rating)
+            totalRate = temp+int(rating)
+            profile.rate = round(totalRate / profile.rateCount, 2)
+            
+        else:
+            profile.rateCount=1
+            profile.rate = rating
+            profile.serviceCount =1
+        profile.save()
+        schedule.delete()
+        
+        return render (request, template_name='pages/home.html')
+    
+    
+    else:
+    # Optionally return an error or message
+        messages.error(request, "Please select a star rating before submitting.")
+    
+    return render(request, 'pages/rateDriver.html',context)

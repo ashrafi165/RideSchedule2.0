@@ -30,7 +30,8 @@
                                 <th> Type<span class="icon-arrow">&UpArrow;</span></th>
                                 <th> Price <span class="icon-arrow">&UpArrow;</span></th>
                                 <th> Status <span class="icon-arrow">&UpArrow;</span></th>
-                                <th> </th>
+                                <th> <span class="icon-arrow">&UpArrow;</span></th>
+                                <th> <span class="icon-arrow">&UpArrow;</span></th>
                             </tr>
                         </thead>
                         <tbody class="tableBodyPostBody">
@@ -52,12 +53,13 @@
                                 <td> <strong> {{p.price}}TK </strong></td>
                                 {% if p.pending %}
                                     <td><p class="status pending">Pending</p></td>
-                                    <td><a href="{% url 'deleteSchedule' p.id %}" class="redButton">Cancel</a>
-                                        <a href="{% url 'updateSchedule' p.id %}" class="greenButton">Update</a>
+                                    <td><a href="{% url 'deleteSchedule' p.id %}" class="redButton">Cancel</a></td>
+                                    <td><a href="{% url 'updateSchedule' p.id %}" class="greenButton">Update</a>
                                     </td>
                                 {% else %}
                                     <td><p class="status delivered">Accepted</p></td>
-                                    <td><a href="{% url 'deleteSchedule' p.id %}" class="redButton">Cancel</a>
+                                    <td><p class="status cancelled">Cancel</p></td>
+                                    <td><a href="{% url 'completeSchedule' p.id %}" class="blueButton">Completed</a>
                                         
                                     </td>
                                 {% endif %}

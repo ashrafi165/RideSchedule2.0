@@ -9,6 +9,8 @@ class Profile(models.Model):
     address = models.CharField(max_length=50,null=True, blank=True)
     country = models.CharField(max_length=50,null=True,blank=True)
     rate = models.FloatField(null=True,blank=True)
+    rateCount = models.IntegerField(blank=True,null=True)
+    serviceCount = models.IntegerField(blank=True,null=True)
     birthday = models.DateField(null= True,blank=True)
 
     isRider = models.BooleanField(default=False)

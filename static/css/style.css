@@ -67,6 +67,21 @@ body{
    border-radius: 25px;
   
 }
+
+.blueButton {
+   border: none;
+   background-color: #2289c5;
+   color: white;
+   padding: 10px ;
+   padding-left: 20px;
+   padding-right: 20px;
+   text-align: center;
+   text-decoration: none;
+   font-size: 16px;
+   cursor: pointer;
+   border-radius: 25px;
+  
+}
 .redButton{
    border: none;
    background-color: #e61d1d;
@@ -80,7 +95,7 @@ body{
    cursor: pointer;
    border-radius: 25px;
 }
-.greenButton:hover , .redButton:hover{
+.greenButton:hover , .redButton:hover , .blueButton:hover{
    background-color: #eb923e;
    color: black;
 }
@@ -167,7 +182,7 @@ body{
    text-align: center;
    bottom:20px;
 }
-.messageButton a , .messageButton .mbutton{
+.messageButton .mbutton{
    background-color: #0491aa;
   border: none;
   color: white;
@@ -190,9 +205,7 @@ body{
    padding:12px;
 }
 
-.messageButton a:hover{
-  background-color: #2fb2c9;
-}
+
 
 
 

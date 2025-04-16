@@ -150,12 +150,28 @@ def deleteSchedule(request , id):
     context={
         'title':'Delete Schedule',
         'm1':'are your sure?',
-        'url':'allPostSchedule',
+        'url':'userPost',
     }
     if request.method == 'POST':
         schedule.delete()
         return redirect('userPost')
     return render(request, 'notification/confirm.html',context)
+
+@login_required(login_url='login')
+def completeSchedule(request , id):
+    schedule = Schedule.objects.get(pk = id)
+    context={
+        'title':str(schedule.type_of_schedule) + ' Completed',
+        'm1':'Do you want to Rate '+ str(schedule.driver_id) + '?',
+        'text1': schedule.driver_id,
+        'schedule':id,
+        'url1':'rateDriver',
+        'url2':'userPost',
+    }
+    if request.method == 'POST':
+        schedule.delete()
+        return redirect('userPost')
+    return render(request, 'notification/completeService.html',context)
 
 
 @login_required(login_url='login')
