@@ -32,6 +32,10 @@ urlpatterns = [
     path('createRider', a_view.createRider , name = 'createRider'),
     path('profileUpdate', a_view.profileUpdate, name='profileUpdate'),
     path('changePassword',a_view.changePassword, name='changePassword'),
+
+    path('history',s_view.history,name='history'),
+    path('deleteHistory <str:id>',s_view.deleteHistory,name='deleteHistory'),
+
     
     
     path('weeklySchedule',s_view.weeklySchedule,name='weeklySchedule'),

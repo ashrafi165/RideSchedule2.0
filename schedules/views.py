@@ -143,6 +143,20 @@ def takeSchedule(request , id):
         return redirect('schedulePost')
     return render(request, 'notification/confirm.html',context)
 
+@login_required(login_url='login')
+def deleteHistory(request , id):
+    schedule = Schedule.objects.get(pk = id)
+    context={
+        'title':'Delete History',
+        'm1':'are your sure?',
+        'url':'history',
+    }
+    if request.method == 'POST':
+        
+        schedule.delete()
+        return redirect('history')
+    return render(request, 'notification/confirm.html',context)
+
 
 @login_required(login_url='login')
 def deleteSchedule(request , id):
@@ -153,7 +167,8 @@ def deleteSchedule(request , id):
         'url':'userPost',
     }
     if request.method == 'POST':
-        schedule.delete()
+        schedule.history = True
+        schedule.save()
         return redirect('userPost')
     return render(request, 'notification/confirm.html',context)
 
@@ -169,7 +184,8 @@ def completeSchedule(request , id):
         'url2':'userPost',
     }
     if request.method == 'POST':
-        schedule.delete()
+        schedule.history = True
+        schedule.save()
         return redirect('userPost')
     return render(request, 'notification/completeService.html',context)
 
@@ -271,3 +287,16 @@ def pharmacy(request):
 
 
     return render(request,'delivery/pharmacy.html')
+
+
+
+def history(request):
+
+    schedulePost = Schedule.objects.all().order_by("pickUp_time")
+
+    posts = {
+        'schedulePost': schedulePost,
+        
+    }
+
+    return render(request, 'accounts/history.html', posts)

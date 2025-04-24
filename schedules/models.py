@@ -26,6 +26,7 @@ class Schedule(models.Model):
     weeks = models.CharField(max_length=30,blank=True,null=True)
     weight = models.IntegerField(blank=True, null=True)
     phone = models.CharField(max_length=14,blank=True,null=True)
+    history = models.BooleanField(default=False)
 
 
     def __str__(self):
