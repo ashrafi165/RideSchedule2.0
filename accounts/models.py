@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-import json
 
 
 class Profile(models.Model):
@@ -13,7 +12,6 @@ class Profile(models.Model):
     rateCount = models.IntegerField(blank=True,null=True)
     serviceCount = models.IntegerField(blank=True,null=True)
     birthday = models.DateField(null= True,blank=True)
-    history = models.TextField(null =True, blank= True)
 
     isRider = models.BooleanField(default=False)
 
@@ -21,12 +19,6 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
-    
-    def get_history(self):
-        return json.loads(self.history) if self.history else []
-
-    def set_history(self, history_list):
-        self.history = json.dumps(history_list)
   
 
 class Rate(models.Model):

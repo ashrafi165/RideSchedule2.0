@@ -189,4 +189,3 @@ def rateDriver(request,id,scheduleid):
         messages.error(request, "Please select a star rating before submitting.")
     
     return render(request, 'pages/rateDriver.html',context)
-
