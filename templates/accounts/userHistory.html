@@ -93,7 +93,13 @@
                         {% for p in history %}
 
     
+                            {% if p.status == "canceled" %}
+                            <tr style="background:#d99393;">
+                            {% elif p.status == "accepted" %}
+                            <tr style="background:#b4f0a5;">
+                            {% else %}
                             <tr>
+                            {% endif %}
 
                                 <td> {{p.time}}</td>
                                 <td>{{p.rider}} </td>
@@ -106,7 +112,7 @@
                                 <td> <strong> {{p.price}}TK </strong></td>
                                 
                                 <td>{{p.status}}</td>
-                                <td><a href="#" class="redButton">delete</a></td>
+                                <td><a href="{% url 'deleteHistory' p.id %}" class="redButton">delete</a></td>
                                 
                                 
                             </tr>
