@@ -160,7 +160,7 @@ def deleteSchedule(request , id):
         'url':'userPost',
     }
     if request.method == 'POST':
-        createHistory(request,schedule,"deleted")
+        createHistory(request,schedule,"canceled")
         schedule.delete()
         return redirect('userPost')
     return render(request, 'notification/confirm.html',context)

@@ -41,8 +41,13 @@
 
                             
 
-
+                            {% if p.status == "canceled" %}
+                            <tr style="background:#d99393;">
+                            {% elif p.status == "accepted" %}
+                            <tr style="background:#b4f0a5;">
+                            {% else %}
                             <tr>
+                            {% endif %}
 
                                 <td> {{p.time}}</td>
                                 <td>{{p.driver}} </td>
@@ -59,6 +64,8 @@
                                 
                                 
                             </tr>
+
+                            
                             
                         {% endfor %}
                         </tbody>
