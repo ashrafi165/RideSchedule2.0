@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import render ,redirect
-from accounts.models import Profile,Notification,Rate
+from accounts.models import Profile
 from schedules.models import Schedule
 
 from .forms import *
@@ -156,8 +156,6 @@ def changePassword(request):
 @login_required(login_url='login')
 def rateDriver(request,id,scheduleid):
     user = User.objects.get(username = id)
-    print(id)
-    print(user)
     profile = Profile.objects.get(user = user)
     print(profile)
     schedule = Schedule.objects.get(pk=scheduleid)

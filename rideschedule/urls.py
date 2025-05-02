@@ -57,6 +57,9 @@ urlpatterns = [
     path('help', b_view.help , name = 'help'),
     path('contact', b_view.contact , name = 'contact'),
     
+    path('readHistory',s_view.readHistory,name = 'readHistory'),
+    path('deleteHistory <str:id>', s_view.deleteHistory, name='deleteHistory'),
+    
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

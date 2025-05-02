@@ -1,9 +1,12 @@
 
 from schedules.models import Schedule
 from django.contrib.auth.models import User, auth
+from datetime import date
+from datetime import datetime
+from django.views.decorators.csrf import csrf_exempt
 
 from django.shortcuts import render ,redirect
-from accounts.models import Profile,Notification
+from accounts.models import Profile
 from schedules.models import Schedule
 
 from .scheduleForm import *
@@ -38,6 +41,7 @@ def weeklySchedule(request):
         if(request.POST.get('SAT')): week = week+' '+request.POST.get('SAT')
 
         schedule = Schedule.objects.create(rider_id=rider,pickUp_time=pickUp_time,pickup_from=pickUp_from,drop_to=drop_to,type_of_schedule='weekly',price=price,startDate=startDate,endDate=endDate,weeks=week)
+        createHistory(request,schedule,"created")
         schedule.save()
         context = { 
             'title':'Successfull',
@@ -68,6 +72,7 @@ def monthlySchedule(request):
         if(request.POST.get('SAT')): week = week+' '+request.POST.get('SAT')
 
         schedule = Schedule.objects.create(rider_id=rider,pickUp_time=pickUp_time,pickup_from=pickUp_from,drop_to=drop_to,type_of_schedule='monthly',price=price,startDate=startDate,endDate=endDate,weeks=week)
+        createHistory(request,schedule,"created")
         schedule.save()
         context = { 
             'title':'Successfull',
@@ -91,6 +96,7 @@ def dailySchedule(request):
         # endDate = request.POST.get('endDate')
 
         schedule = Schedule.objects.create(rider_id=rider,pickUp_time=pickUp_time,pickup_from=pickUp_from,drop_to=drop_to,type_of_schedule='daily',price=price,startDate=startDate)
+        createHistory(request,schedule,"created")
         schedule.save()
         context = { 
             'title':'Successfull',
@@ -138,6 +144,7 @@ def takeSchedule(request , id):
     if request.method == 'POST':
         schedule.pending = False
         schedule.driver_id = request.user.username
+        createHistory(request,schedule,"accepted")
         schedule.save()
         
         return redirect('schedulePost')
@@ -153,6 +160,7 @@ def deleteSchedule(request , id):
         'url':'userPost',
     }
     if request.method == 'POST':
+        createHistory(request,schedule,"deleted")
         schedule.delete()
         return redirect('userPost')
     return render(request, 'notification/confirm.html',context)
@@ -169,6 +177,7 @@ def completeSchedule(request , id):
         'url2':'userPost',
     }
     if request.method == 'POST':
+        createHistory(request,schedule,"completed")
         schedule.delete()
         return redirect('userPost')
     return render(request, 'notification/completeService.html',context)
@@ -190,6 +199,7 @@ def updateSchedule(request, id):
                 'm2':'your schedule Update Successfull',
                 'url':'userPost',
                 }
+                createHistory(request,schedule,"updated")
                 return render(request , 'notification/message.html' , context)
         return render(request, 'update/updateSchedule.html',{'form': form })
     except:
@@ -212,6 +222,7 @@ def parcelDelivery(request):
         weight = request.POST.get('Sweight')
 
         schedule = Schedule.objects.create(rider_id=rider,pickUp_time=pickUp_time,pickup_from=pickUp_from,drop_to=drop_to,type_of_schedule='Parcel Delivery',price=price,startDate=startDate,weight=weight)
+        createHistory(request,schedule,"created")
         schedule.save()
         context = { 
             'title':'Successfull',
@@ -236,6 +247,7 @@ def courier(request):
         phone = request.POST.get('Sphone')
  
         schedule = Schedule.objects.create(rider_id=rider,pickUp_time=pickUp_time,pickup_from=pickUp_from,drop_to=drop_to,type_of_schedule='Courier',price=price,startDate=startDate,weight=weight,phone=phone)
+        createHistory(request,schedule,"created")
         schedule.save()
         context = { 
             'title':'Successfull',
@@ -261,6 +273,7 @@ def pharmacy(request):
         phone = request.POST.get('Sphone')
  
         schedule = Schedule.objects.create(rider_id=rider,pickUp_time=pickUp_time,pickup_from=pickUp_from,drop_to=drop_to,type_of_schedule='Pharmacy',price=price,startDate=startDate,weight=weight,phone=phone)
+        createHistory(request,schedule,"created")
         schedule.save()
         context = { 
             'title':'Successfull',
@@ -271,3 +284,59 @@ def pharmacy(request):
 
 
     return render(request,'delivery/pharmacy.html')
+
+def createHistory(request, schedule, status):
+    user1 = User.objects.get(username = schedule.rider_id) 
+
+    profile1 = Profile.objects.get(user=user1)
+    history1 = profile1.get_history()
+
+    
+    
+    history = {
+        "id": str(datetime.now().isoformat()),
+        "time": str(date.today()),  
+        "driver": str(schedule.driver_id),
+        "rider": str(schedule.rider_id),
+        "date": str(schedule.startDate)+" - "+str(schedule.endDate),
+        "pickUp":str(schedule.pickUp_time), 
+        "type":str(schedule.type_of_schedule) ,
+        "location": str(schedule.pickup_from)+" - "+str(schedule.drop_to),
+        "price":str(schedule.price),
+        "status": status
+    }
+    if schedule.driver_id is not None and schedule.driver_id.strip() != "":
+        user2 = User.objects.get(username = schedule.driver_id)
+        profile2 = Profile.objects.get(user = user2)
+        history2 = profile2.get_history()
+        history2.append(history)
+        profile2.set_history(history2)
+        profile2.save()
+        
+    history1.append(history)     
+    profile1.set_history(history1)
+    profile1.save()
+    
+    
+    
+    
+def readHistory(request):
+    user = request.user  
+    profile = Profile.objects.get(user=user)
+    history = profile.get_history()
+    history = history[::-1]
+    return render(request, 'accounts/userHistory.html', {'history': history})
+
+
+
+def deleteHistory(request,id):
+         
+    profile = request.user.profile
+    history = profile.get_history()
+
+    history = [item for item in history if item.get('id') != id]
+
+    profile.set_history(history)
+    profile.save()
+
+    return redirect('readHistory')  

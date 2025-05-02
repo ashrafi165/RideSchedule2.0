@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+import json
 
-
+  
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     
@@ -12,25 +13,27 @@ class Profile(models.Model):
     rateCount = models.IntegerField(blank=True,null=True)
     serviceCount = models.IntegerField(blank=True,null=True)
     birthday = models.DateField(null= True,blank=True)
-
+    history = models.TextField(null =True, blank= True)
+    notifications = models.TextField(null=True, blank=True)
     isRider = models.BooleanField(default=False)
 
     image = models.ImageField(upload_to='upload', null=True, blank=True)
 
     def __str__(self):
         return self.user.username
-  
-
-class Rate(models.Model):
-    user_id = models.CharField(blank=True,null=True,max_length=20)
-    rate =  models.FloatField(null=True,blank=True)
-
     
-    def __str__(self):
-        return self.user_id
+    def get_history(self):
+        return json.loads(self.history) if self.history else []
 
-class Notification(models.Model):
-    user_id = models.ForeignKey(Profile,on_delete=models.CASCADE)
-    title = models.CharField(blank=True,null=True,max_length=20)
-    message = models.CharField(blank=True,null=True,max_length=50)
+    def set_history(self, history_list):
+        self.history = json.dumps(history_list)
+    
+    def get_notifications(self):
+        return json.loads(self.notifications) if self.notifications else []
+
+    def set_notifications(self, notification_list):
+        self.notifications = json.dumps(notification_list)
+        
+
+
     
