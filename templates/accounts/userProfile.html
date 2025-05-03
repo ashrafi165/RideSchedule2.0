@@ -84,24 +84,37 @@
 
             <div class="rank">
                 <b>Rating :</b>
-                {{request.user.profile.rate}}/5.0
-                <div class="rating">
-                    <i class="ri-star-fill rate"></i>
-                    <i class="ri-star-fill rate"></i>
-                    <i class="ri-star-fill rate"></i>
-                    <i class="ri-star-fill rate"></i>
-                    <i class="ri-star-fill rate underrate"></i>
-                </div>
+                {{request.user.profile.rate}}/5.0 <s style = "font-size:70%; color:#808080;">by {{request.user.profile.rateCount}} reviews</s>
+                <div style="font-size:140%;">
+                {% with rate=request.user.profile.rate %}
+                {% if rate < 1 %}
+                    ☆☆☆☆☆
+                {% elif rate < 2 %}
+                    ★☆☆☆☆
+                {% elif rate < 3 %}
+                    ★★☆☆☆
+                {% elif rate < 4 %}
+                    ★★★☆☆
+                {% elif rate < 5 %}
+                    ★★★★☆
+                {% else %}
+                    ★★★★★
+                {% endif %}
+                {% endwith %}
+                </div> 
+
+                
+                
             </div>
 
             <div class="btns">
                 <ul>
-                    <li class="sendMsg">
-                        <a href="#" class="profileButton">Send Message</a>
+                    <li class="redButton">
+                        <a href="#" >Send Message</a>
                     </li>
 
-                    <li class="sendMsg">
-                        <a href="#" class="profileButton">Report User</a>
+                    <li >
+                        <a href="#" class="redButton">Report User</a>
 
                     </li>
                 </ul>
