@@ -5,12 +5,12 @@
         <h2>{{request.user.username}}</h2>
         <ul>
             <li> <a href="{% url 'userProfile' %}"><i class='fas fa-user-circle' style='font-size:16px'></i> Profile</a></li>
-            <li> <a href="#" onclick="showNotification()"><i class="fa fa-bell-o"></i> Notification</a></li>
+            <li> <a href="#" onclick="showNotification()"><i class="fa fa-bell-o"></i> Notification ({{ notification|length }})</a></li>
             <li> <a href="{% url 'changePassword' %}"><i class='fas fa-lock'></i> Change Password</a></li>
             <hr>
-            <li> <a href="{% url 'userPost' %}"><i class="fa fa-calendar"></i> All Schedule</a></li>
+            <li> <a href="{% url 'userPost' %}"><i class="fa fa-calendar"></i> All Schedule ({{ schedule|length }}) </a></li>
             <li> <a href="#"><i class="fa fa-money"></i> Payment</a></li>
-            <li> <a href="{% url 'readHistory' %}"><i class="fa fa-history"></i> History</a></li>
+            <li> <a href="{% url 'readHistory' %}"><i class="fa fa-history"></i> History ({{ history|length }})</a></li>
             <li> <a href="#"><i class="fa fa-home"></i> Saved Address</a></li>
             <li> <a href="#"><i class='fas fa-user-shield' style='font-size:15px;color:white'></i> Privacy</a></li>
             <li> <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a></li>
@@ -27,13 +27,24 @@
         <span class ="close" onclick="hideNotification()">&times;</span>
         <h2>Notifications</h2>
         <ul> 
-            {% comment %} {% for n in notification %}
-                {% if n.user_id == request.user.profile %}
-                    <li> <a href="{% url 'deleteNotification' n.id %}"> {{n.message}} </a></li>
+            {% for n in notification %}
+                {% if n.status == 'canceled' %}
+                    <li> 
+                    <a href="#"> {{n.time}} | Driver: {{n.driver}}<br> {{n.type}} has been canceled </a>
+                    </li>
+                {% else %}
+                    <li> 
+                    <a href="#"> {{n.time}} | Driver: {{n.driver}}<br> {{n.driver}} accepted your request </a>
+                    </li>
                 {% endif %}
-            {% endfor %} {% endcomment %}
+            {% endfor %} 
             
         </ul>
+        <ul>
+        <li><a href="#" class="reaButton"> clear all </a></li>
+            
+        </ul>
+        
         
     </div>
     <script type="text/javascript">

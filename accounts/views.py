@@ -18,7 +18,27 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='login')
 def userProfile(request):
-    return render(request, template_name='accounts/userProfile.html')
+    try:
+        profile = request.user.profile
+        notification = profile.get_notifications()
+        history = profile.get_history()
+        if request.user.profile.isRider:
+            schedule = Schedule.objects.filter(rider_id=request.user.profile).order_by("pickUp_time")
+        else:
+            schedule = Schedule.objects.filter(driver_id=request.user.username).order_by("pickUp_time")
+        
+    except Exception as e:
+        
+        notification = []
+        history = []
+        schedule = []
+           
+    context = {
+        'notification':notification,
+        'history':history,
+        'schedule':schedule
+    } 
+    return render(request,'accounts/userProfile.html',context)
 
 
 def createRider(request):

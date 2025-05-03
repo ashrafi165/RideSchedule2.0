@@ -111,6 +111,7 @@ def dailySchedule(request):
 
 @driver_required(redirect_url='home')
 def schedulePost(request):
+    
     schedulePost = Schedule.objects.all().order_by("pickUp_time")
 
     posts = {
@@ -121,13 +122,28 @@ def schedulePost(request):
 
 @login_required(login_url='login')
 def userPost(request):
-    schedulePost = Schedule.objects.all().order_by("pickUp_time")
-
-    posts = {
-        'schedulePost': schedulePost,
+    
+    try:
+        profile = request.user.profile
+        notification = profile.get_notifications()
+        history = profile.get_history()
+        if request.user.profile.isRider:
+            schedule = Schedule.objects.filter(rider_id=request.user.profile).order_by("pickUp_time")
+        else:
+            schedule = Schedule.objects.filter(driver_id=request.user.username).order_by("pickUp_time")
         
-    }
-    return render(request, template_name='accounts/userPost.html', context=posts)
+    except Exception as e:
+        
+        notification = []
+        history = []
+        schedule = []
+           
+    context = {
+        'notification':notification,
+        'history':history,
+        'schedule':schedule
+    } 
+    return render(request, 'accounts/userPost.html', context)
 
 
 @driver_required(redirect_url='home')
@@ -145,6 +161,7 @@ def takeSchedule(request , id):
         schedule.pending = False
         schedule.driver_id = request.user.username
         createHistory(request,schedule,"accepted")
+        createNotification(request,schedule,"accepted")
         schedule.save()
         
         return redirect('schedulePost')
@@ -161,6 +178,7 @@ def deleteSchedule(request , id):
     }
     if request.method == 'POST':
         createHistory(request,schedule,"canceled")
+        createNotification(request,schedule,"canceled")
         schedule.delete()
         return redirect('userPost')
     return render(request, 'notification/confirm.html',context)
@@ -207,7 +225,28 @@ def updateSchedule(request, id):
     
     
 def allService(request):
-    return render (request, template_name='schedule/allservice.html')
+    try:
+        profile = request.user.profile
+        notification = profile.get_notifications()
+        history = profile.get_history()
+        if request.user.profile.isRider:
+            schedule = Schedule.objects.filter(rider_id=request.user.profile).order_by("pickUp_time")
+        else:
+            schedule = Schedule.objects.filter(driver_id=request.user.username).order_by("pickUp_time")
+        
+    except Exception as e:
+        
+        notification = []
+        history = []
+        schedule = []
+    
+    notification = notification[::-1]       
+    context = {
+        'notification':notification,
+        'history':history,
+        'schedule':schedule
+    } 
+    return render (request,'schedule/allservice.html',context)
 
 
 @rider_required(redirect_url='home')
@@ -285,11 +324,42 @@ def pharmacy(request):
 
     return render(request,'delivery/pharmacy.html')
 
+
+def createNotification(request,schedule,status):
+    
+    user = User.objects.get(username = schedule.rider_id) 
+
+    profile = Profile.objects.get(user=user)
+    
+    data = {
+        "id": str(datetime.now().isoformat()),
+        "time": str(date.today()),  
+        "driver": str(schedule.driver_id),
+        "rider": str(schedule.rider_id),
+        "date": str(schedule.startDate)+" - "+str(schedule.endDate),
+        "pickUp":str(schedule.pickUp_time), 
+        "type":str(schedule.type_of_schedule) ,
+        "location": str(schedule.pickup_from)+" - "+str(schedule.drop_to),
+        "price":str(schedule.price),
+        "status": status
+    }
+    notification = profile.get_notifications()
+    notification.append(data)
+    
+    if len(notification) > 10:
+        notification = notification[-10:]
+        
+    profile.set_notifications(notification)
+    profile.save()
+    
+    
+
 def createHistory(request, schedule, status):
     user1 = User.objects.get(username = schedule.rider_id) 
 
     profile1 = Profile.objects.get(user=user1)
     history1 = profile1.get_history()
+    
 
     
     
@@ -340,3 +410,9 @@ def deleteHistory(request,id):
     profile.save()
 
     return redirect('readHistory')  
+
+def deleteAllHistory(request):
+    profile = request.user.profile
+    profile.set_history([])  
+    profile.save()           
+    return redirect('readHistory')

@@ -36,7 +36,7 @@
                         </thead>
                         <tbody class="tableBodyPostBody">
 
-                        {% for p in schedulePost %}
+                        {% for p in schedule %}
 
                             {% if p.rider_id == request.user.profile %}
 
@@ -84,7 +84,7 @@
                         </thead>
                         <tbody class="tableBodyPostBody">
 
-                        {% for p in schedulePost %}
+                        {% for p in schedule %}
 
                             {% if p.driver_id == request.user.username %}
 
