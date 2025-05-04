@@ -67,6 +67,7 @@ def createRider(request):
                     'm3':'Make sure to remember your username or password to Login',
                     'url':'home',
                 }
+            login(request,user)
             return render(request , 'notification/message.html' , context)
             
         else:
