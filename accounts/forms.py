@@ -8,10 +8,18 @@ class UserForm(ModelForm):
         model = User
         fields = ['first_name','last_name','email']
 
-class ProfileForm(ModelForm):
+# class ProfileForm(ModelForm):
+#     class Meta:
+#         model = Profile
+#         fields = ['phone','address','country','image']
+        
+        
+class ProfileForm(forms.ModelForm):
+    birthday = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}), required=False)
+
     class Meta:
         model = Profile
-        fields = ['phone','address','country','image']
+        fields = ['phone', 'address', 'country', 'image', 'birthday']
 
 class ChangePassword(ModelForm):
     class Meta:

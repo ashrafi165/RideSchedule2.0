@@ -12,6 +12,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 
 # Create your views here.
 
@@ -119,6 +121,10 @@ def logOutUser(request):
     auth.logout(request)
     return redirect('/')
 
+
+
+
+
 @login_required(login_url='login')
 def profileUpdate(request):
     formU = UserForm()
@@ -152,25 +158,47 @@ def profileUpdate(request):
 
     return render(request, 'update/profileUpdate.html',context)
 
+
 @login_required(login_url='login')
 def changePassword(request):
-    form = ChangePassword()
-    user = User.objects.get(username = request.user.username)
-
-    form = ChangePassword(instance = user)
-
     if request.method == 'POST':
-        form = ChangePassword(request.POST, request.FILES, instance=user)
+        form = PasswordChangeForm(user=request.user, data=request.POST)
         if form.is_valid():
-            form.save()
-            context = { 
-            'title':'Successfull',
-            'm1': 'Password change successfull',
-            'url':'home',
+            user = form.save()
+            update_session_auth_hash(request, user)  # prevent logout
+            context = {
+                'title': 'Successful',
+                'm1': 'Password changed successfully',
+                'url': 'home',
             }
-            return render(request , 'notification/message.html' , context)
-        return redirect('/')
-    return render(request, 'update/changePassword.html',{'form': form})
+            return render(request, 'notification/message.html', context)
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(user=request.user)
+    
+    return render(request, 'update/changePassword.html', {'form': form})
+
+
+# @login_required(login_url='login')
+# def changePassword(request):
+#     form = ChangePassword()
+#     user = User.objects.get(username = request.user.username)
+
+#     form = ChangePassword(instance = user)
+
+#     if request.method == 'POST':
+#         form = ChangePassword(request.POST, request.FILES, instance=user)
+#         if form.is_valid():
+#             form.save()
+#             context = { 
+#             'title':'Successfull',
+#             'm1': 'Password change successfull',
+#             'url':'home',
+#             }
+#             return render(request , 'notification/message.html' , context)
+#         return redirect('/')
+#     return render(request, 'update/changePassword.html',{'form': form})
 
 
 @login_required(login_url='login')

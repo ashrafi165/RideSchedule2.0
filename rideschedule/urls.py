@@ -34,6 +34,7 @@ urlpatterns = [
     path('changePassword',a_view.changePassword, name='changePassword'),
     
     
+    
     path('weeklySchedule',s_view.weeklySchedule,name='weeklySchedule'),
     path('dailySchedule',s_view.dailySchedule, name='dailySchedule'),
     path('monthlySchedule',s_view.monthlySchedule, name='monthlySchedule'),
