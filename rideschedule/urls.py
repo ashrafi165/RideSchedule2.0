@@ -62,7 +62,7 @@ urlpatterns = [
     path('deleteHistory <str:id>', s_view.deleteHistory, name='deleteHistory'),
     path('deleteAllHistory',s_view.deleteAllHistory,name = 'deleteAllHistory'),
     path('deleteAllNotification',s_view.deleteAllNotification,name = 'deleteAllNotification'),
-    
+    path('addAi',a_view.ai,name='ai'),
     
 ]
 
