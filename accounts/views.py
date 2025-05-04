@@ -56,7 +56,7 @@ def createRider(request):
 
             is_rider_bool = is_rider == "True"
             
-            profile = Profile.objects.create(user=user, isRider=is_rider_bool)
+            profile = Profile.objects.create(user=user, isRider=is_rider_bool,rate = 0, rateCount = 0,serviceCount = 0,scheduleCount = 0,deliveryCount = 0,fiveStar = 0)
             profile.save()
             context = { 
                     'title':'Welcome',
@@ -185,18 +185,14 @@ def rateDriver(request,id,scheduleid):
     }
     if request.method == 'POST':
         rating = request.POST.get('rate') 
-        if profile.rateCount:
-            temp = profile.rate*profile.rateCount
-            profile.rateCount=profile.rateCount+1
-            print(rating)
-            totalRate = temp+int(rating)
-            profile.rate = round(totalRate / profile.rateCount, 2)
-            
-        else:
-            profile.rateCount=1
-            profile.rate = rating
-            profile.serviceCount =1
+        profile.increase_rating(rating)
+        profile.increase_service(schedule)
         profile.save()
+        
+        profile = request.user.profile
+        profile.increase_service(schedule)
+        profile.save()
+        
         schedule.delete()
         
         return render (request, template_name='pages/home.html')

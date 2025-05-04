@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+
 import json
 
   
@@ -9,9 +10,12 @@ class Profile(models.Model):
     phone = models.CharField(max_length=20,null=True,blank=True)
     address = models.CharField(max_length=50,null=True, blank=True)
     country = models.CharField(max_length=50,null=True,blank=True)
-    rate = models.FloatField(null=True,blank=True)
-    rateCount = models.IntegerField(blank=True,null=True)
-    serviceCount = models.IntegerField(blank=True,null=True)
+    rate = models.FloatField(null=True,blank=True,default=0)
+    rateCount = models.IntegerField(blank=True,null=True,default=0)
+    serviceCount = models.IntegerField(blank=True,null=True,default=0)
+    scheduleCount = models.IntegerField(blank=True,null=True,default=0)
+    deliveryCount = models.IntegerField(blank=True,null=True,default=0)
+    fiveStar = models.IntegerField(blank=True,null=True,default=0)
     birthday = models.DateField(null= True,blank=True)
     history = models.TextField(null =True, blank= True)
     notifications = models.TextField(null=True, blank=True)
@@ -33,6 +37,31 @@ class Profile(models.Model):
 
     def set_notifications(self, notification_list):
         self.notifications = json.dumps(notification_list)
+        
+    def increase_rating(self,rate):
+        if int(rate)==5: self.fiveStar +=1
+        
+        if self.rateCount:
+            temp = self.rate*self.rateCount
+            self.rateCount+=1
+            
+            totalRate = temp+int(rate)
+            self.rate = round(totalRate / self.rateCount, 2)
+            
+        else:
+            self.rateCount=1
+            self.rate = int(rate)
+            
+    def increase_service(self, schedule):
+        if schedule.type_of_schedule in ['daily', 'weekly', 'monthly', 'custom']:
+            self.scheduleCount += 1
+        else:
+            self.deliveryCount += 1
+
+        self.serviceCount += 1
+
+        
+            
         
 
 

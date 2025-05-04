@@ -195,10 +195,21 @@ def completeSchedule(request , id):
         'url2':'userPost',
     }
     if request.method == 'POST':
+        
+        rider = request.user.profile
+        user = User.objects.get(username = schedule.driver_id)
+        driver = Profile.objects.get(user = user)
+        
+        rider.increase_service(schedule)
+        rider.save()
+        driver.increase_service(schedule)
+        driver.save()
         createHistory(request,schedule,"completed")
         schedule.delete()
         return redirect('userPost')
     return render(request, 'notification/completeService.html',context)
+
+
 
 
 @login_required(login_url='login')
@@ -391,9 +402,7 @@ def createHistory(request, schedule, status):
     
     
 def readHistory(request):
-    user = request.user  
-    profile = Profile.objects.get(user=user)
-    history = profile.get_history()
+    history = request.user.profile.get_history()
     history = history[::-1]
     return render(request, 'accounts/userHistory.html', {'history': history})
 
@@ -416,3 +425,9 @@ def deleteAllHistory(request):
     profile.set_history([])  
     profile.save()           
     return redirect('readHistory')
+
+def deleteAllNotification(request):
+    profile = request.user.profile
+    profile.set_notifications([])  
+    profile.save()           
+    return redirect('/')

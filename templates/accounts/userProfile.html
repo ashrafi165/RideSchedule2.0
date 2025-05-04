@@ -107,18 +107,39 @@
                 
             </div>
 
-            <div class="btns">
-                <ul>
-                    <li class="redButton">
-                        <a href="#" >Send Message</a>
-                    </li>
+            
+            <div style="position: sticky; top: 0; background: #f9f9f9; padding: 15px 20px; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-bottom: 2px solid #ddd;">
+  <ul style="
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    gap: 40px;
+    width: 100%;
+  ">
+    <li style="font-size: 180%; text-align: center; padding: 10px 15px; border-radius: 8px; transition: background 0.3s;">
+      {{request.user.profile.serviceCount}}<br>
+      <span style="font-size: 60%; color: #666;">Service</span>
+    </li>
+    <li style="font-size: 180%; text-align: center; padding: 10px 15px; border-radius: 8px; transition: background 0.3s;">
+      {{request.user.profile.scheduleCount}}<br>
+      <span style="font-size: 60%; color: #666;">Schedule</span>
+    </li>
+    <li style="font-size: 180%; text-align: center; padding: 10px 15px; border-radius: 8px; transition: background 0.3s;">
+      {{request.user.profile.deliveryCount}}<br>
+      <span style="font-size: 60%; color: #666;">delivery</span>
+    </li>
+    <li style="font-size: 180%; text-align: center; padding: 10px 15px; border-radius: 8px; transition: background 0.3s;">
+      {{request.user.profile.fiveStar}}<br>
+      <span style="font-size: 60%; color: #666;">5 star received</span>
+    </li>
+  </ul>
+</div>
 
-                    <li >
-                        <a href="#" class="redButton">Report User</a>
 
-                    </li>
-                </ul>
-            </div>
         </section>
 
 
