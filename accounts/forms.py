@@ -8,10 +8,7 @@ class UserForm(ModelForm):
         model = User
         fields = ['first_name','last_name','email']
 
-# class ProfileForm(ModelForm):
-#     class Meta:
-#         model = Profile
-#         fields = ['phone','address','country','image']
+
         
         
 class ProfileForm(forms.ModelForm):
@@ -25,3 +22,4 @@ class ChangePassword(ModelForm):
     class Meta:
         model = User
         fields = '__all__'
+        

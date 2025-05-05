@@ -31,7 +31,9 @@ urlpatterns = [
     path('logOutUser', a_view.logOutUser, name='logOutUser'),
     path('createRider', a_view.createRider , name = 'createRider'),
     path('profileUpdate', a_view.profileUpdate, name='profileUpdate'),
-    path('changePassword',a_view.changePassword, name='changePassword'),
+    path('settings', a_view.settings_view, name='settings'),
+    path('settings/change-password/', a_view.change_password_view, name='changePassword'),
+    path('settings/delete/', a_view.delete_account_view, name='deleteAccount'),
     
     
     

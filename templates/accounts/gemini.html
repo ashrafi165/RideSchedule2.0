@@ -9,10 +9,34 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
-</head>
-<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 
-  
+
+
+    <link rel = "stylesheet" href = "{% static 'css/style.css' %}">
+    <link rel = "stylesheet" href = "{% static 'css/navbar.css' %}">
+    <link rel = "stylesheet" href = "{% static 'css/offcanvas.css' %}">
+    <link rel = "stylesheet" href = "{% static 'css/login.css' %}">
+    <link rel = "stylesheet" href = "{% static 'css/makeSchedule.css' %}">
+    <link rel = "stylesheet" href = "{% static 'css/userProfile.css' %}">
+    <link rel = "stylesheet" href = "{% static 'css/footer.css' %}">
+    <link rel = "stylesheet" href = "{% static 'css/schedulePost.css' %}">
+
+    <link rel = "stylesheet" href = "{% static 'css/policy.css' %}">
+    <link rel = "stylesheet" href = "{% static 'css/rateUs.css' %}">
+    <link rel = "stylesheet" href = "{% static 'css/UserHelpCenter.css' %}">
+    <link rel = "stylesheet" href = "{% static 'css/contact.css' %}">
+    <link rel = "stylesheet" href = "{% static 'css/allservice.css' %}">
+
+    
+</head>
+<body style="background-color:white;">
+
+
+
 
 
 
@@ -22,9 +46,15 @@
             <i class="fas fa-arrow-left"></i>
             <span class="back-text">Back</span>
         </button>
-
-        <div class="profile-picture" id="profile-picture">
-            <img src="{{ user.profile.image.url }}" alt="User Profile Picture">
+        {% include "../base/offcanvas.html" %}
+        <div class="profile-picture" id="profile-picture" onclick="showMenu()" style="z-index:1;">
+            
+            {% if request.user.profile.image %}
+                <img src="{{request.user.profile.image.url}}" width="250px" height="250px" alt="logo">
+            {% else %}
+                <img src="{%  static 'image/icon/profile.png' %}" width="250px" height="250px" alt="logo">
+                
+            {% endif %}
         </div>
 
         <div class="chat-messages-container">

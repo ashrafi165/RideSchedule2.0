@@ -160,47 +160,85 @@ def profileUpdate(request):
     return render(request, 'update/profileUpdate.html',context)
 
 
-@login_required(login_url='login')
-def changePassword(request):
+# @login_required(login_url='login')
+# def changePassword(request):
+#     if request.method == 'POST':
+#         form = PasswordChangeForm(user=request.user, data=request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             update_session_auth_hash(request, user)  # prevent logout
+#             context = {
+#                 'title': 'Successful',
+#                 'm1': 'Password changed successfully',
+#                 'url': 'home',
+#             }
+#             return render(request, 'notification/message.html', context)
+#         else:
+#             messages.error(request, 'Please correct the error below.')
+#     else:
+#         form = PasswordChangeForm(user=request.user)
+    
+#     return render(request, 'update/changePassword.html', {'form': form})
+
+
+@login_required
+def settings_view(request):
+    if request.method == 'POST':
+        formU = UserForm(request.POST, instance=request.user)
+        formP = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+
+        if formU.is_valid() and formP.is_valid():
+            formU.save()
+            formP.save()
+            messages.success(request, "Your profile has been updated.")
+            context = { 
+            'title':'Successfull',
+            'm1': request.user.username,
+            'm2':'your profile Update Successfull',
+            'url':'userProfile',
+            }
+            return render(request , 'notification/message.html' , context)
+            
+    else:
+        formU = UserForm(instance=request.user)
+        formP = ProfileForm(instance=request.user.profile)
+
+    password_form = PasswordChangeForm(user=request.user)
+
+    return render(request, 'accounts/settings.html', {
+        'formU': formU,
+        'formP': formP,
+        'form': password_form,
+    })
+    
+def change_password_view(request):
     if request.method == 'POST':
         form = PasswordChangeForm(user=request.user, data=request.POST)
         if form.is_valid():
-            user = form.save()
-            update_session_auth_hash(request, user)  # prevent logout
+            form.save()
+            update_session_auth_hash(request, form.user)
             context = {
                 'title': 'Successful',
-                'm1': 'Password changed successfully',
-                'url': 'home',
+                'm1': 'Your password was successfully updated!',
+                'url': '/',
             }
             return render(request, 'notification/message.html', context)
+            
         else:
             messages.error(request, 'Please correct the error below.')
     else:
         form = PasswordChangeForm(user=request.user)
+
+    return render(request, 'accounts/settings.html', {
+        'form': form,
+    })
     
-    return render(request, 'update/changePassword.html', {'form': form})
-
-
-# @login_required(login_url='login')
-# def changePassword(request):
-#     form = ChangePassword()
-#     user = User.objects.get(username = request.user.username)
-
-#     form = ChangePassword(instance = user)
-
-#     if request.method == 'POST':
-#         form = ChangePassword(request.POST, request.FILES, instance=user)
-#         if form.is_valid():
-#             form.save()
-#             context = { 
-#             'title':'Successfull',
-#             'm1': 'Password change successfull',
-#             'url':'home',
-#             }
-#             return render(request , 'notification/message.html' , context)
-#         return redirect('/')
-#     return render(request, 'update/changePassword.html',{'form': form})
-
+@login_required
+def delete_account_view(request):
+    if request.method == 'POST':
+        request.user.delete()
+        messages.success(request, 'Your account has been deleted.')
+        return redirect('home')  
 
 @login_required(login_url='login')
 def rateDriver(request,id,scheduleid):
