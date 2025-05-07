@@ -118,7 +118,7 @@ def schedulePost(request):
         'schedulePost': schedulePost,
         
     }
-    return render(request, template_name='schedule/SchedulePost.html', context=posts)
+    return render(request, template_name='schedule/schedulePost.html', context=posts)
 
 @login_required(login_url='login')
 def userPost(request):
