@@ -46,6 +46,7 @@ urlpatterns = [
     path('allService',s_view.allService, name='allService'),
     
     path('userProfile',a_view.userProfile,name='userProfile'),
+     path('addAi',a_view.ai,name='ai'),
     
     path('schedulePost',s_view.schedulePost,name = 'schedulePost'),
     path('userPost',s_view.userPost,name = 'userPost'),
@@ -59,12 +60,14 @@ urlpatterns = [
     path('rateDriver <str:id> <str:scheduleid>', a_view.rateDriver, name = 'rateDriver'),
     path('help', b_view.help , name = 'help'),
     path('contact', b_view.contact , name = 'contact'),
+    path('joinHelp', b_view.helpToJoin, name='joinHelp'),
     
     path('readHistory',s_view.readHistory,name = 'readHistory'),
     path('deleteHistory <str:id>', s_view.deleteHistory, name='deleteHistory'),
     path('deleteAllHistory',s_view.deleteAllHistory,name = 'deleteAllHistory'),
     path('deleteAllNotification',s_view.deleteAllNotification,name = 'deleteAllNotification'),
-    path('addAi',a_view.ai,name='ai'),
+   
+    
     
 ]
 

@@ -431,3 +431,5 @@ def deleteAllNotification(request):
     profile.set_notifications([])  
     profile.save()           
     return redirect('/')
+
+
