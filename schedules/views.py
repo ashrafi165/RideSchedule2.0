@@ -402,9 +402,29 @@ def createHistory(request, schedule, status):
     
     
 def readHistory(request):
-    history = request.user.profile.get_history()
-    history = history[::-1]
-    return render(request, 'accounts/userHistory.html', {'history': history})
+    
+    try:
+        profile = request.user.profile
+        notification = profile.get_notifications()
+        history = profile.get_history()
+        history = history[::-1]
+        if request.user.profile.isRider:
+            schedule = Schedule.objects.filter(rider_id=request.user.profile).order_by("pickUp_time")
+        else:
+            schedule = Schedule.objects.filter(driver_id=request.user.username).order_by("pickUp_time")
+        
+    except Exception as e:
+        
+        notification = []
+        history = []
+        schedule = []
+           
+    context = {
+        'notification':notification,
+        'history':history,
+        'schedule':schedule
+    } 
+    return render(request, 'accounts/userHistory.html', context)
 
 
 

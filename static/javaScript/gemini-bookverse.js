@@ -5,7 +5,7 @@ import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "https://cd
 // --- Configuration ---
 // WARNING: Storing API keys client-side is insecure for production. Use a backend proxy.
 //const API_KEY = "AIzaSyCzDw4jYsl91ncl2wadhh9jpWdFmVtD0pg";
-const API_KEY = "AIzaSyAed16cy4w1dGTgFLfyZuWc3uN5zaji4dI";
+const API_KEY = "AIzaSyB9MEX_BMG0fmhdQPoGS2t19bxFoqFMP5k";
 // const API_KEY = "AIzaSyCtAUsfYtkvHS69pPmefA_54lseRh276MI";
 // const API_KEY = "AIzaSyACrU66ejkJV4-K2cWoH9tEH1W8lcEKFx8";
 //const MODEL_NAME = "gemini-1.5-pro-latest";
